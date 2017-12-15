@@ -25,6 +25,8 @@ $config->addJS('dist', 'main.js'); ?>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="<?php echo MAIN_URL ?>/assets/jquery/jquery-2.2.3.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!--	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script> -->
 
@@ -37,17 +39,60 @@ $config->addJS('dist', 'main.js'); ?>
 
 <header>
 	<div class="header_top">
-		mBook admin
+		<div class="logo left">360land admin</div>
+
+		<div class="nav-user right">
+			<a class="hide" id="me_login_link" href="<?php echo MAIN_URL ?>/login">Đăng nhập</a>
+			<div class="dropdown hide" id="me_dropdown_info">
+				<a class="dropdown-toggle" data-toggle="dropdown">
+					<img src="<?php echo MAIN_URL ?>/data/avt.png" class="nav-user-avt img-circle myAvt"/>
+					<strong class="s-title myName"></strong>
+					<span class="hidden myID"></span>
+					<div class="clearfix"></div>
+				</a>
+				<ul class="dropdown-menu with-triangle pull-right">
+					<li class="user-header">
+						<img src="<?php echo MAIN_URL ?>/data/avt.png" id="meinfo_avt" class="img-circle" alt="User Image">
+						<p><span id="meinfo_name"></span> - <small id="meinfo_uname">@tutu</small></p>
+					</li>
+					<!-- Menu Body -->
+					<li class="user-body u-sta sta-list">
+						<div class="sta-one u-coins">
+							<strong id="meinfo_coins"></strong>
+							coins
+						</div>
+						<div class="sta-one u-hh">
+							<strong id="meinfo_hh">12</strong>
+							hh
+						</div>
+						<div class="sta-one u-kk">
+							<strong id="meinfo_kk">5</strong>
+							kk
+						</div>
+					</li>
+					<!-- Menu Footer-->
+					<li class="user-footer">
+						<div class="pull-left">
+							<a class="btn btn-success btn-flat" id="meinfo_profile_link" href="#">Profile</a>
+						</div>
+						<div class="pull-right">
+							<a class="btn btn-danger btn-flat" href="<?php echo MAIN_URL ?>/logout">Logout</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
 	</div>
 	<nav id="top_navbar" class="navbar navbar-static-top">
-			<ul class="items-list">
-				<li class="one-item <?php if ($page == 'realestate') echo 'active' ?>" id="realestate">
-					<a href="<?php echo MAIN_URL ?>/realestate">Nodes &amp; Projects</a>
-				</li>
-				<li class="one-item <?php if ($page == 'user') echo 'active' ?>" id="user">
-					<a href="<?php echo MAIN_URL ?>/user">User</a>
-				</li>
-			</ul>
+		<ul class="items-list">
+			<li class="one-item <?php if ($page == 'realestate') echo 'active' ?>" id="realestate">
+				<a href="<?php echo MAIN_URL ?>/realestate">Nodes &amp; Projects</a>
+			</li>
+			<li class="one-item <?php if ($page == 'user') echo 'active' ?>" id="user">
+				<a href="<?php echo MAIN_URL ?>/user">User</a>
+			</li>
+		</ul>
 
 		<div class="form-search">
 			<form class="search-form">
@@ -55,6 +100,7 @@ $config->addJS('dist', 'main.js'); ?>
 				<div id="search_button" class="search-button"></div>
 			</form>
 		</div>
+
 	</nav>
 </header>
 

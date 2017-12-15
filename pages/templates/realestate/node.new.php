@@ -15,7 +15,7 @@
         <div class="col-md-4 no-padding control-labels">Loại </div>
         <div class="col-md-8 no-padding">
             <label class="col-sm-3"><input name="type_action" type="radio" checked value="2"> Bán</label>
-            <label class="col-sm-3" style="margin-top:5px!important"><input name="type_action" type="radio" value="1"> Cho thuê</label>
+            <label class="col-sm-3"><input name="type_action" type="radio" value="1"> Cho thuê</label>
             <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
@@ -321,7 +321,7 @@
 
     <div class="add-form-submit center">
         <input value="Làm lại" class="btn btn-default" type="reset">
-        <input value="Gửi" class="btn btn-primary" type="submit">
+        <input value="Gửi" class="btn" type="submit">
     </div>
     </div>
 </form>

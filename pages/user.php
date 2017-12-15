@@ -10,10 +10,22 @@ if ($n) {
     $config->addJS('plugins', 'morris/morris.min.js');
     $config->addJS('dist', $page.'/view.js');
 
-    include 'templates/'.$page.'/view.php';
+    include 'templates/'.$page.'/edit.php';
+}
+else if ($mode == 'new') {
+    $pageTitle = 'Add new';
+    include 'templates/header.php';
+
+    $config->addJS('dist', $page.'/'.$mode.'.js');
+
+    include 'templates/'.$page.'/'.$mode.'.php';
 }
 else {
     $pageTitle = 'Users list';
     include 'templates/header.php';
+
+    $config->addJS('plugins', 'DataTables/datatables.min.js');
+    $config->addJS('dist', $page.'/list.js');
+
 	include 'templates/'.$page.'/list.php';
 }

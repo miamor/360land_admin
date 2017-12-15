@@ -184,7 +184,6 @@ option{height:30px;padding:5px 10px 5px 21px}
 .add-form-submit.form-one-button .btn{border-radius:3px!important}
 .btn:not(.btn-sm){padding:6px 14px 9px}
 .btn-sm{font-size:13px;line-height:16px!important}
-.btn{border-radius:0}
 .btn-red, .btn-add{background:#e84c3d;color:#fff}
 .btn-red:hover, .btn-add:hover{background:#e84c3d!important;color:#fff!important}
 
@@ -197,7 +196,7 @@ h4{padding:8px 0;margin:0}
 
 /* Header */
 header{position:relative;height:130px;background:#fff}
-#top_navbar{position:absolute;bottom:0;left:0;right:0;height:40px;min-height:40px;background:#369fcf;margin:0;border:0;font-size:14px}
+#top_navbar{position:absolute;bottom:0;left:0;right:0;height:40px;min-height:40px;background:#369fcf;margin:0;border:0;font-size:14px;z-index:6}
 #top_navbar ul, #top_navbar li, #top_navbar a{position:relative;height:100%!important;margin:0}
 #top_navbar .one-item{display:inline-block;}
 #top_navbar .one-item a{display:block;padding:5px 12px;color:#fff}
@@ -208,7 +207,7 @@ header{position:relative;height:130px;background:#fff}
 menu{background:#fafafa;border:1px solid #eee;margin:-1px 10px 0 -11px;padding:10px 10px 20px 25px!important}
 menu h4{margin:10px 0 -1px;font-weight:600;}
 menu h3.menu-title{margin:0 0 5px;color:#369fcf}
-.menu-one-item{display: block;padding:0 10px 3px;position: relative;z-index:4;border-bottom:1px solid #eee;margin-bottom:-1px}
+.menu-one-item{display: block;padding:0 10px 2px;position: relative;z-index:4;border-bottom:1px solid #eee;margin-bottom:-1px}
 .menu-one-item:hover,.menu-one-item.active{background:#84c754;color:#fff;border-color:#84c754;z-index:5}
 .menu-one-item:hover::before {content:"\f138";float:right;font-family:"FontAwesome";font-size:17px;margin-right:0;margin-top:2px}
 
@@ -218,23 +217,71 @@ main{}
 /* Footer */
 footer{margin-top:30px;padding:20px 5%;background:#fff;border-top:1px solid #eee}
 
-/* Page: book */
-.book-thumb{width:100%;height:auto}
-.book-list .empty{padding:20px 0;}
-.one-book-row{position:relative;background:#fff;border:1px solid #e5e5e5;margin-top:-1px;padding:8px}
-.one-book-in_storage{position:absolute;z-index:10;top:35px;left:-2px;width:40px;height:30px;background:#e84c3d;color:#fff;text-align:center;line-height:25px;font-size:17px;font-weight:600;border-radius:0 6px 6px 0}
 
-
-.borrow-status,.one-book-status{display:inline-block;width:10px;height:10px;border-radius:100%;background:#ccc}
-.borrow-status[data-stt="1"]{background:#f0ad4e}
-.borrow-status[data-stt="2"],.one-book-status[data-stt="1"]{background:#5cb85c}
-.borrow-status-text{font-size:10px}
-
-
+.chart canvas{position:relative}
 .thead{background:#fafafa}
 main>h2{margin:30px 0 40px;color:#369fcf}
-.filterBox{border:1px solid #e5e5e5;background:#fafafa;box-shadow:inset 1px -1px 3px -1px rgba(0,0,0,.04);border-radius:4px;padding:10px}
+.filterBox{border:1px solid #e5e5e5;background:#fafafa;box-shadow:inset 1px -1px 3px -1px rgba(0,0,0,.04);border-radius:4px;padding:10px;margin-bottom:30px}
 .filterBox .filterBox-header{font-size:18px;margin:-20px 0 10px;font-weight:600;}
 .one-book-actions{padding:0!important}
 .one-book-actions label.checkbox{margin:-1px -3px 0 0!important}
 .one-book-actions a{font-size:19px;margin:-1px 4px 0 0}
+
+
+/* Page: realestate */
+#map_select{position:relative;width:100%;height:500px;margin-top:8px}
+#details_address:not(.d_adr_search){position: absolute;z-index:5;width:90%;margin:15px 5% 0!important}
+#details_address + #infowindow-content{display:none}
+#pricefrom_giatri, #price_giatri{width:59%!important;margin-right:1%!important;float:left}
+#pricefrom_donvi, #price_donvi{width:39%!important}
+
+
+
+.nav-user{padding:25px 20px}
+.nav-user-avt{width:40px;height:40px;float:left}
+/* User dropdown */
+#top_navbar .nav-user .dropdown-menu{padding:0!important;color:#444;margin:0}
+.header_top .nav-user .dropdown-menu>li.user-header{height:125px;width:280px;padding:10px;text-align:center;background:#e84c3d}
+.header_top .nav-user .dropdown-menu>li.user-header>img{z-index:5;height:80px;width:80px;border:3px solid;border-color:transparent;background:#fff;border-color:rgba(255,255,255,0.2)}
+.header_top .nav-user .dropdown-menu>li.user-header>p{z-index:5;color:#fff;color:rgba(255,255,255,0.95);font-size:17px;margin-top:5px}
+.header_top .nav-user .dropdown-menu>li.user-header>p>small{font-size:12px}
+.header_top .nav-user .dropdown-menu>.user-body{padding:15px 0;border-bottom:1px solid #eee;margin:0}
+.header_top .nav-user .dropdown-menu>.user-body:before,.header_top .nav-user .dropdown-menu>.user-body:after{content:" ";display:table}
+.header_top .nav-user .dropdown-menu>.user-body:after{clear:both}
+.header_top .nav-user .dropdown-menu>.user-footer{background-color:#f8f8f8;padding:4px 10px;border-top:1px solid #fff}
+.header_top .nav-user .dropdown-menu>.user-footer:before,.header_top .nav-user .dropdown-menu>.user-footer:after{content:" ";display:table}
+.header_top .nav-user .dropdown-menu>.user-footer:after{clear:both}
+.header_top .nav-user .dropdown-menu>.user-footer .btn-default{color:#666}
+.header_top .avatar{float:left;margin-right:5px}
+.header_top .s-title{float:left;margin:8px 0 0 5px}
+.header_top .me-coins img{float:left;margin:5px 5px 0 3px}
+
+
+/* Ratings list */
+.ratings>i{margin-left:-2px}
+.rating-one-sm{height:45px;margin-bottom:6px;border-bottom:1px solid #eee}
+.rating-one-sm-info{height:40px;overflow:hidden;margin-top:1px}
+.rating-one-sm:last-child{border-bottom:0}
+.rating-one-sm-avt{float:left;width:40px;height:40px;margin-right:6px;border-radius:100%;margin-top:-1px}
+.rating-one-sm-username{padding:0;margin:0 4px 0 0;font-size:14px;line-height:14px}
+.rating-one-sm .ratings{line-height:14px;margin:2px 5px -2px 1px;float:left}
+.rating-one-sm-details{line-height:18px;margin:2px 0 -2px 1px;max-height:35px}
+.ratings-more{margin:4px 0 5px;position:relative}
+.ratings-more-one{position:relative;padding:1px 5px}
+.ratings-more-one:nth-child(2n){background:#f8f8f8}
+#ratings-chart{width:130px;height:130px;float:left;margin:-8px -5px 0 -5px}
+body:not(.mobile) #ratings-chart{width:160px;height:160px}
+body:not(.mobile) #sales-chart{width:250px;height:250px}
+.v-box>h4{font-size:15px}
+.ratings-label{max-width:50%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+body.mobile .ratings-label{font-size:13px}
+body.mobile .ratings-list-div{padding:0!important;margin-top:5px}
+body.mobile .v-user-body>div{padding:0!important}
+
+body.mobile .v-user-avt{float:none;width:100%;height:180px;margin:0 auto 10px}
+
+
+.table thead{background:#f8f8f8}
+.tab-content{padding:20px 0}
+
+.hide{display:none} .hidden{display:none!important}

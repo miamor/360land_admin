@@ -85,6 +85,7 @@ class Config {
 		$this->eLink = MAIN_URL.'/realestate';
 		$this->nLink = $this->eLink.'/node';
 		$this->pLink = $this->eLink.'/project';
+		$this->snLink = $this->eLink.'/servicenode';
 		$this->JS = '';
 		$this->FB = new Facebook\Facebook([
 			'app_id' => FB_APP_ID, // Replace {app-id} with your app id

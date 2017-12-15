@@ -15,9 +15,3 @@
         <a class="menu-one-item" href="<?php echo $config->uLink.'?type=coins&mode=change' ?>">Change coin</a>
     </div>
 </div>
-
-<div class="menu-one-box">
-    <h4 class="menu-one-box-header">Membership</h4>
-    <div class="menu-one-box-body">
-    </div>
-</div>

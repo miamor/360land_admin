@@ -66,6 +66,6 @@
 
 	<div class="add-form-submit center">
 		<input type="reset" value="Reset" class="btn btn-default">
-		<input type="submit" value="Submit" class="btn btn-red">
+		<input type="submit" value="Submit" class="btn">
 	</div>
 </form>

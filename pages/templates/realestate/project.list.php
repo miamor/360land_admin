@@ -1,4 +1,4 @@
-<h2>Nodes</h2>
+<h2>Dự án</h2>
 
 <form id="formFilter" class="filterBox filters">
 	<h3 class="filterBox-header">Filter</h3>

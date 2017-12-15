@@ -1,4 +1,7 @@
-<form class="place-add">
+<h2><i class="fa fa-map-marker"></i> Sửa dự án</h2>
+
+
+<form class="place-add col-md-10">
     <div class="add-form-content">
     <div class="form-group" attr-required="1">
         <div class="col-md-4 no-padding control-label">Tiêu đề </div>
