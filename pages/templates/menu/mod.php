@@ -5,5 +5,6 @@
     <div class="menu-one-box-body">
         <a class="menu-one-item" href="<?php echo $config->mLink ?>">List all</a>
         <a class="menu-one-item" href="<?php echo $config->mLink.'/me' ?>">Edit my info</a>
+        <a class="menu-one-item" href="<?php echo $config->mLink.'/me?mode=changepassword' ?>">Change my password</a>
     </div>
 </div>
