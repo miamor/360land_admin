@@ -63,8 +63,8 @@
     <div class="form-group form-adr" attr-required="1">
         <div class="col-md-4 no-padding control-label"><i class="fa fa-map-marker"></i> Địa chỉ </div>
         <div class="col-md-8 no-padding">
-            <div class="col-md-6 select-city no-padding-left">
-                <select class="form-control" id="city" name="tinh">
+            <div class="col-md-6 select-tinh no-padding-left">
+                <select class="form-control" id="tinh" name="tinh">
                     <option value="-1">--Chọn Tỉnh/Thành phố *--</option>
                     <option value="SG">Hồ Chí Minh</option>
                     <option value="HN">Hà Nội</option>
@@ -131,8 +131,8 @@
                     <option value="CB">Cao Bằng</option>
                 </select>
             </div>
-            <div class="col-md-6 select-district no-padding-left">
-                <select class="form-control" id="district" name="huyen">
+            <div class="col-md-6 select-huyen no-padding-left">
+                <select class="form-control" id="huyen" name="huyen">
                     <option value="-1">--Chọn Quận/Huyện *--</option>
                 </select>
             </div>
@@ -211,7 +211,7 @@
     <div class="form-group" attr-required="1">
         <div class="col-md-4 no-padding control-label">Hướng</div>
         <div class="col-md-8 no-padding">
-            <select id="direction" name="direction" class="form-control">
+            <select id="huong" name="huong" class="form-control">
                 <option value="CN">Chọn hướng</option>
                 <option value="e">Đông</option>
                 <option value="en">Đông Bắc</option>

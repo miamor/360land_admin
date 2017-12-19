@@ -1,6 +1,6 @@
 <h2>Add new user</h2>
 
-<form class="bootstrap-validator-form new-write" action="?do=new">
+<form class="new-user">
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Username *</div>
 		<div class="col-lg-9 no-padding">
@@ -11,11 +11,8 @@
 
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Name *</div>
-		<div class="col-lg-4 no-padding">
-			<input class="form-control" name="first_name" placeholder="First name *" type="text"/>
-		</div>
-		<div class="col-lg-5 no-padding-right">
-			<input class="form-control" name="last_name" placeholder="Last name *" type="text"/>
+		<div class="col-lg-8 no-padding">
+			<input class="form-control" name="name" placeholder="Name *" type="text"/>
 		</div>
 		<div class="clearfix"></div>
 	</div>
@@ -31,7 +28,7 @@
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Coins</div>
 		<div class="col-lg-9 no-padding">
-			<input class="form-control" name="coins" placeholder="Coins" type="number" value="100"/>
+			<input class="form-control" name="coin" placeholder="coin" type="number"/>
 		</div>
 		<div class="clearfix"></div>
 	</div>

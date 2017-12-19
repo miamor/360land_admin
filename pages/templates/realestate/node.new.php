@@ -1,7 +1,7 @@
 <h2><i class="fa fa-map-marker"></i> Thêm địa điểm</h2>
 
 
-<form class="place-add col-md-10">
+<form class="place-add" id="theform">
     <div class="add-form-content">
     <div class="form-group" attr-required="1">
         <div class="col-md-4 no-padding control-label">Tiêu đề </div>
@@ -11,7 +11,7 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="form-group" attr-required="1">
+    <div class="form-group form-type_action" attr-required="1">
         <div class="col-md-4 no-padding control-labels">Loại </div>
         <div class="col-md-8 no-padding">
             <label class="col-sm-3"><input name="type_action" type="radio" checked value="2"> Bán</label>
@@ -63,8 +63,8 @@
     <div class="form-group form-adr" attr-required="1">
         <div class="col-md-4 no-padding control-label"><i class="fa fa-map-marker"></i> Địa chỉ </div>
         <div class="col-md-8 no-padding">
-            <div class="col-md-6 select-city no-padding-left">
-                <select class="form-control" id="city" name="tinh">
+            <div class="col-md-6 select-tinh no-padding-left">
+                <select class="form-control" id="city" name="city">
                     <option value="-1">--Chọn Tỉnh/Thành phố *--</option>
                     <option value="SG">Hồ Chí Minh</option>
                     <option value="HN">Hà Nội</option>
@@ -130,16 +130,18 @@
                     <option value="BK">Bắc Kạn</option>
                     <option value="CB">Cao Bằng</option>
                 </select>
+                <input type="hidden" id="tinh" name="tinh"/>
             </div>
-            <div class="col-md-6 select-district no-padding-left">
-                <select class="form-control" id="district" name="huyen">
+            <div class="col-md-6 select-huyen no-padding-left">
+                <select class="form-control" id="district" name="district">
                     <option value="-1">--Chọn Quận/Huyện *--</option>
                 </select>
+                <input type="hidden" id="huyen" name="huyen"/>
             </div>
             <div class="clearfix"></div>
 
             <div class="form-group map_select customshow typereal2 typereal3 typereal4 typereal5 typereal6 typereal7 typereal8 typereal10 typereal12 typereal13 typereal14 typereal15 typereal16 typereal17 typereal18" attr-required="1">
-                <input type="text" class="form-control" style="margin-top:6px" id="details_address" name="details_address" placeholder="Địa chỉ cụ thể (không bắt buộc)"/>
+                <input type="text" class="form-control" style="margin-top:6px" id="address" name="address" placeholder="Địa chỉ cụ thể (không bắt buộc)"/>
 
                 <div id="infowindow-content">
                     <img src="" width="16" height="16" id="place-icon">
@@ -156,7 +158,7 @@
     <div class="form-group hide customshow typereal11 typereal1 typereal4" attr-required="1">
         <div class="col-md-4 no-padding control-label">Thuộc dự án </div>
         <div class="col-md-8 no-padding">
-            <input type="text" name="tenduan" id="tenduan" class="form-control" placeholder="Nhập tên dự án"/>
+            <input type="text" name="tenduan" id="tenduan" class="form-control" autocomplete="off" placeholder="Nhập tên dự án"/>
             <div class="ville-dropdown hide"></div>
             <input type="hidden" name="duanid" id="duanid" class="form-control"/>
         </div>
@@ -211,7 +213,7 @@
     <div class="form-group" attr-required="1">
         <div class="col-md-4 no-padding control-label">Hướng</div>
         <div class="col-md-8 no-padding">
-            <select id="direction" name="direction" class="form-control">
+            <select id="huong" name="huong" class="form-control">
                 <option value="CN">Chọn hướng</option>
                 <option value="e">Đông</option>
                 <option value="en">Đông Bắc</option>
@@ -237,10 +239,26 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="form-group" attr-required="1">
+    <div class="form-group">
+        <div class="col-md-4 no-padding control-label">Thumbs </div>
+        <div class="col-md-8 no-padding">
+            <textarea class="form-control non-sce" name="thumbs" id="thumbs" placeholder="Mỗi link ảnh một dòng"></textarea>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-4 no-padding control-label">Panorama image </div>
+        <div class="col-md-8 no-padding">
+            <input type="text" placeholder="Panorama image (url)" class="form-control" name="panorama_image" id="panorama_image"/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group">
         <div class="col-md-4 no-padding control-label">Thông tin chi tiết </div>
         <div class="col-md-8 no-padding">
-            <textarea class="form-control" name="details" placeholder="Thông tin chi tiết"></textarea>
+            <textarea class="form-control" name="details" id="details" placeholder="Thông tin chi tiết"></textarea>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -252,28 +270,36 @@
             <input class="form-control" type="text" id="timeto" name="timeto" placeholder="dd/mm/yyyy"/>
         </div>
         <div class="clearfix"></div>
-    </div>
+    </div>-->
 
-    <div class="form-group rank-select">
+    <div class="form-group rank-select" attr-required="1">
         <div class="col-md-4 no-padding control-label">Chọn gói </div>
         <div class="col-md-8 no-padding">
             <div class="rank-one-select" attr-rank="1">
                 <div class="rank-one-des">Blah blah </div>
-                <div class="rank-one-title">Rank 1</div>
+                <div class="rank-one-title">rank 1</div>
             </div>
             <div class="rank-one-select" attr-rank="2">
                 <div class="rank-one-des">Bleh bleh</div>
-                <div class="rank-one-title">Rank 2</div>
+                <div class="rank-one-title">rank 2</div>
             </div>
             <div class="rank-one-select" attr-rank="3">
                 <div class="rank-one-des">Bloh bloh</div>
-                <div class="rank-one-title">Rank 3</div>
+                <div class="rank-one-title">rank 3</div>
             </div>
             <div class="clearfix"></div>
         </div>
-        <input type="hidden" name="rank" id="rank"/>
+        <input type="hidden" name="rank" id="rank" value="0"/>
         <div class="clearfix"></div>
-    </div>-->
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-4 no-padding control-label">Chọn gói (vip)</div>
+        <div class="col-md-8 no-padding">
+            <input type="text" class="form-control" name="vip" id="vip" value="0"/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 
 
     <div class="user-info-input">
@@ -318,6 +344,8 @@
     <input type="hidden" name="typenode" value="true"/>
     <input type="hidden" name="latitude" id="latitude"/>
     <input type="hidden" name="longitude" id="longitude"/>
+    <input type="hidden" name="timefrom" id="timefrom"/>
+    <input type="hidden" name="timeto" id="timeto"/>
 
     <div class="add-form-submit center">
         <input value="Làm lại" class="btn btn-default" type="reset">

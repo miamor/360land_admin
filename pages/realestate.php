@@ -17,6 +17,10 @@ if ($n) {
     if ($id) {
         $config->addJS('plugins', 'chartjs/Chart.min.js');
 
+        $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyACkc-PYhlnPUWJaV2GlcCiEcuJujZsMdc&libraries=places');
+        $config->addJS('dist', $page.'/form.js');
+        $config->addJS('dist', $page.'/'.$n.'.edit.js');
+
         $config->addJS('dist', $page.'/'.$n.'.view.js');
 
         include 'templates/'.$page.'/'.$n.'.view.php';
@@ -28,8 +32,9 @@ if ($n) {
 
             $pageTitle = $id.' - Stat';
         }
-        else {
+        else { // edit
             $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyACkc-PYhlnPUWJaV2GlcCiEcuJujZsMdc&libraries=places');
+            $config->addJS('dist', $page.'/form.js');
         }
 
         $config->addJS('dist', $page.'/'.$n.'.'.$mode.'.js');
@@ -37,7 +42,9 @@ if ($n) {
         include 'templates/'.$page.'/'.$n.'.'.$mode.'.php';
 
     } else {
-        $config->addJS('dist', $page.'/list.js');
+        $config->addJS('plugins', 'DataTables/datatables.min.js');
+        $config->addJS('dist', $page.'/'.$n.'.list.js');
+
         include 'templates/'.$page.'/'.$n.'.list.php';
     }
 }

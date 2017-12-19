@@ -43,7 +43,8 @@
 
 
 var isMobile = ($(window).width() <= 500 ? true : false);
-var API_URL = '//45.119.82.40:8000';
+var API_URL = '//45.119.82.40:8000/manager_mod';
+var API_URL_ALL = API_URL.split('/manager_')[0];
 var __token = __userInfo = null;
 
 
@@ -61,6 +62,14 @@ jQuery.fx.interval = 50;
 var duration = 5000;
 var interval;
 
+function objectifyForm(formArray) {//serialize data function
+  	var returnArray = {};
+  	for (var i = 0; i < formArray.length; i++){
+    	returnArray[formArray[i]['name']] = formArray[i]['value'];
+  	}
+  	return returnArray;
+}
+
 function redirect(location) {
 //	if (!time) time = 200;
 //	setTimeout(function () {
@@ -76,12 +85,13 @@ $.fn.digits = function(){
 
 function getUserInfo () {
     $.ajax({
-        url: API_URL+'/manager_mod/info/',
+        url: API_URL+'/info/',
         type: 'get',
         beforeSend: function(xhr) {
             xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
         },
         success: function (response) {
+			response = response.data;
             localStorage.setItem('user_info', JSON.stringify(response));
             __userInfo = JSON.parse(localStorage.getItem('user_info'));
             console.log(__userInfo);
@@ -512,7 +522,7 @@ function flatApp () {
 	$('input[type="reset"]').addClass('btn btn-default');
 
 	if ($('.bootstrap-validator-form').length) validator();
-	sce('#main-content');
+	//sce('#main-content');
 	//if ($('.chosen-select').length) choosen();
 //	icons();
 /*	$('.tooltip').remove();
@@ -682,9 +692,22 @@ function logout (autoLoggedOut = false) {
     else location.reload();
 }
 
+function logoutBtn() {
+	$('[href*="/logout"]').click(function () {
+        //popup('<div class="popup-section section-light">Đang đăng xuất khỏi tài khoản <b>'+__userInfo.username+'</b>...</div>');
+		mtip('', 'info', '', 'Đang đăng xuất khỏi tài khoản <b>'+__userInfo.username+'</b>...')
+        logout();
+        setTimeout(function () {
+            remove_popup();
+        }, 1000);
+        return false
+    });
+}
 
 jQuery(document).ready(function($){
 	flatApp();
+
+	logoutBtn();
 
 	if (localStorage.getItem('token')) {
         __token = localStorage.getItem('token');
@@ -720,14 +743,5 @@ jQuery(document).ready(function($){
             $('.nav-user-mobile').show().html('<a href="'+MAIN_URL+'/login" class="loginlink"><i class="fa fa-ellipsis-h"></i></a>');
         }*/
     }
-
-	$('[href*="/logout"]').click(function () {
-        popup('<div class="popup-section section-light">Đang đăng xuất khỏi tài khoản <b>'+__userInfo.username+'</b>...</div>');
-        logout();
-        setTimeout(function () {
-            remove_popup();
-        }, 1000);
-        return false
-    });
 
 })

@@ -1,6 +1,6 @@
-<h2>Edit user info: <span class="user-name">User Name</span> <span class="gensmall username">@username</span></h2>
+<h2>Edit my info</h2>
 
-<form class="form-edit-user">
+<form class="form-edit-me">
 	<div class="form-group" attr-required="1">
 		<div class="col-lg-3 control-label no-padding-left">Username</div>
 		<div class="col-lg-9 no-padding">

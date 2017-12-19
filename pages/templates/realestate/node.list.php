@@ -35,13 +35,15 @@
 		<thead>
 			<tr>
 			  <th>ID</th>
-			  <th>Thông tin khách hàng</th>
-			  <th>Thông tin chuyến</th>
-			  <th>Tình trạng</th>
-			  <th>Giá mua ngay</th>
-			  <th>Giá khách trả</th>
-			  <th>Ưu tiên</th>
-			  <th>Taxi đã nhận</th>
+			  <th>Tiêu đề</th>
+			  <th>Loại</th>
+			  <th>Tỉnh</th>
+			  <th>Huyện</th>
+			  <th>Địa chỉ</th>
+			  <th>Giá</th>
+			  <th>Diện tích</th>
+			  <th>Refresh cuối</th>
+			  <th>Stt</th>
 		  </tr>
 		</thead>
 		<tbody>

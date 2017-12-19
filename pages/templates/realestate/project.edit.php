@@ -1,60 +1,29 @@
-<h2><i class="fa fa-map-marker"></i> Sửa dự án</h2>
-
-
-<form class="place-add col-md-10">
+<form class="place-add" id="theform">
     <div class="add-form-content">
     <div class="form-group" attr-required="1">
         <div class="col-md-4 no-padding control-label">Tiêu đề </div>
         <div class="col-md-8 no-padding">
-            <input type="text" class="form-control" placeholder="Tiêu đề " name="title"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group" attr-required="1">
-        <div class="col-md-4 no-padding control-labels">Loại </div>
-        <div class="col-md-8 no-padding">
-            <label class="col-sm-3"><input name="type_action" type="radio" checked value="2"> Bán</label>
-            <label class="col-sm-3"><input name="type_action" type="radio" value="1"> Cho thuê</label>
-            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Tiêu đề " name="name" id="name"/>
         </div>
         <div class="clearfix"></div>
     </div>
 
     <div class="form-group form-type" attr-required="1">
-        <div class="col-md-4 no-padding control-labels">Loại bất động sản</div>
+        <div class="col-md-4 no-padding control-labels">Loại dự án</div>
         <div class="col-md-8 no-padding">
-            <select id="type2" name="type2" class="form-control type_bds" attr-typeaction="2">
-                <option selected value="CN">Chọn loại bất động sản</option>
-                <option value="typereal1">Chung cư</option>
-                <optgroup label="Nhà bán">
-                    <option value="typereal2">Nhà riêng</option>
-                    <option value="typereal3">Nhà mặt phố</option>
-                    <option value="typereal4">Biệt thự, liền kề</option>
-                </optgroup>
-                <optgroup label="Đất bán">
-                    <option value="typereal5">Đất nền dự án</option>
-                    <option value="typereal6">Bán đất</option>
-                </optgroup>
-                <option value="typereal7">Trang trại, khu nghỉ dưỡng</option>
-                <option value="typereal8">Nhà kho, nhà xưởng</option>
-                <option value="typereal10">Khác</option>
+            <select id="type_" name="type_" class="form-control">
+                <option selected value="CN">Chọn loại dự án</option>
+                <option value="loaiduan1">Căn hộ, chung cư</option>
+                <option value="loaiduan10">Biệt thự, liền kề, nhà vườn</option>
+                <option value="loaiduan3">Trung tâm thương mại</option>
+                <option value="loaiduan2">Cao ốc văn phòng</option>
+                <option value="loaiduan4">Khu đô thị mới</option>
+                <option value="loaiduan5">Khu phức hợp</option>
+                <option value="loaiduan6">Nhà ở xã hội</option>
+                <option value="loaiduan7">Khu nghỉ dưỡng, sinh thái</option>
+                <option value="loaiduan8">Khu công nghiệp</option>
+                <option value="loaiduan9">Dự án khác</option>
             </select>
-
-            <select id="type1" name="type1" class="form-control type_bds hide" attr-typeaction="1">
-                <option selected value="CN">Chọn loại bất động sản</option>
-                <option value="typereal11">Chung cư</option>
-                <optgroup label="Nhà thuê">
-                    <option value="typereal12">Nhà riêng</option>
-                    <option value="typereal13">Nhà mặt phố</option>
-                    <option value="typereal14">Phòng trọ, nhà trọ</option>
-                </optgroup>
-                <option value="typereal16">Cửa hàng, ki ốt</option>
-                <option value="typereal15">Văn phòng</option>
-                <option value="typereal17">Trang trại, khu nghỉ dưỡng</option>
-                <option value="typereal18">Khác</option>
-            </select>
-
             <input type="hidden" name="type" id="type"/>
         </div>
         <div class="clearfix"></div>
@@ -63,8 +32,8 @@
     <div class="form-group form-adr" attr-required="1">
         <div class="col-md-4 no-padding control-label"><i class="fa fa-map-marker"></i> Địa chỉ </div>
         <div class="col-md-8 no-padding">
-            <div class="col-md-6 select-city no-padding-left">
-                <select class="form-control" id="city" name="tinh">
+            <div class="col-md-6 select-tinh no-padding-left">
+                <select class="form-control" id="city" name="city">
                     <option value="-1">--Chọn Tỉnh/Thành phố *--</option>
                     <option value="SG">Hồ Chí Minh</option>
                     <option value="HN">Hà Nội</option>
@@ -130,16 +99,18 @@
                     <option value="BK">Bắc Kạn</option>
                     <option value="CB">Cao Bằng</option>
                 </select>
+                <input type="hidden" id="tinh" name="tinh"/>
             </div>
-            <div class="col-md-6 select-district no-padding-left">
-                <select class="form-control" id="district" name="huyen">
+            <div class="col-md-6 select-huyen no-padding-left">
+                <select class="form-control" id="district" name="district">
                     <option value="-1">--Chọn Quận/Huyện *--</option>
                 </select>
+                <input type="hidden" id="huyen" name="huyen"/>
             </div>
             <div class="clearfix"></div>
 
-            <div class="form-group map_select customshow typereal2 typereal3 typereal4 typereal5 typereal6 typereal7 typereal8 typereal10 typereal12 typereal13 typereal14 typereal15 typereal16 typereal17 typereal18" attr-required="1">
-                <input type="text" class="form-control" style="margin-top:6px" id="details_address" name="details_address" placeholder="Địa chỉ cụ thể (không bắt buộc)"/>
+            <div class="form-group map_select" attr-required="1">
+                <input type="text" class="form-control" style="margin-top:6px" id="address" name="address" placeholder="Địa chỉ cụ thể *"/>
 
                 <div id="infowindow-content">
                     <img src="" width="16" height="16" id="place-icon">
@@ -153,76 +124,11 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="form-group hide customshow typereal11 typereal1 typereal4" attr-required="1">
-        <div class="col-md-4 no-padding control-label">Thuộc dự án </div>
-        <div class="col-md-8 no-padding">
-            <input type="text" name="tenduan" id="tenduan" class="form-control" placeholder="Nhập tên dự án"/>
-            <div class="ville-dropdown hide"></div>
-            <input type="hidden" name="duanid" id="duanid" class="form-control"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
 
     <div class="txt-with-line center">
     	<span class="txt generate-new-button">Thông tin thêm <span class="fa fa-caret-down"></span></span>
     </div>
 
-    <div class="form-group hide customshow typereal1 typereal11 typereal2 typereal3 typereal4" attr-required="1">
-        <div class="col-md-4 no-padding control-label customshow typereal1 typereal11 hide">Ở tầng </div>
-        <div class="col-md-4 no-padding control-label customshow typereal2 typereal3 typereal4 hide">Số tầng </div>
-        <div class="col-md-8 no-padding">
-            <input type="number" name="tang" id="tang" class="form-control"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group hide customshow typereal2 typereal3 typereal4" attr-required="1">
-        <div class="col-md-4 no-padding control-label">Chiều rộng mặt tiền *</div>
-        <div class="col-md-8 no-padding">
-            <input type="number" name="rongtien" id="rongtien" class="form-control" placeholder="Chiều rộng mặt tiền"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group hide customshow typereal2 typereal3 typereal4" attr-required="1">
-        <div class="col-md-4 no-padding control-label">Chiều rộng mặt đường *</div>
-        <div class="col-md-8 no-padding">
-            <input type="number" name="rongduong" id="rongduong" class="form-control" placeholder="Chiều rộng mặt đường"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group" attr-required="1">
-        <div class="col-md-4 no-padding control-label">Diện tích </div>
-        <div class="col-md-8 no-padding">
-            <input type="number" min="1" placeholder="Diện tích" class="form-control" name="area" id="area"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group" attr-required="1">
-        <div class="col-md-4 no-padding control-label">Số phòng ngủ </div>
-        <div class="col-md-8 no-padding">
-            <input type="number" min="1" placeholder="Số phòng ngủ" class="form-control" name="sophongngu" id="sophongngu"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="form-group" attr-required="1">
-        <div class="col-md-4 no-padding control-label">Hướng</div>
-        <div class="col-md-8 no-padding">
-            <select id="direction" name="direction" class="form-control">
-                <option value="CN">Chọn hướng</option>
-                <option value="e">Đông</option>
-                <option value="en">Đông Bắc</option>
-                <option value="es">Đông Nam</option>
-                <option value="w">Tây</option>
-                <option value="wn">Tây Bắc</option>
-                <option value="ws">Tây Nam</option>
-            </select>
-        </div>
-        <div class="clearfix"></div>
-    </div>
     <div class="form-group form-price" attr-required="1">
         <div class="col-md-4 no-padding control-label"><i class="fa fa-dollar"></i> Giá </div>
         <div class="col-md-8 no-padding">
@@ -237,85 +143,77 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="form-group" attr-required="1">
+    <div class="form-group">
+        <div class="col-md-4 no-padding control-label">Thumbs </div>
+        <div class="col-md-8 no-padding">
+            <textarea class="form-control non-sce" name="thumbs" id="thumbs" placeholder="Mỗi link ảnh một dòng"></textarea>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-4 no-padding control-label">Panorama image </div>
+        <div class="col-md-8 no-padding">
+            <input type="text" placeholder="Panorama image (url)" class="form-control" name="panorama_image" id="panorama_image"/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-4 no-padding control-label">Tiến độ </div>
+        <div class="col-md-8 no-padding">
+            <input type="text" placeholder="Tiến độ" class="form-control" name="tiendo" id="tiendo"/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-4 no-padding control-label">Giới thiệu </div>
+        <div class="col-md-8 no-padding">
+            <textarea class="form-control" name="intro" id="intro" placeholder="Giới thiệu"></textarea>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group">
         <div class="col-md-4 no-padding control-label">Thông tin chi tiết </div>
         <div class="col-md-8 no-padding">
-            <textarea class="form-control" name="details" placeholder="Thông tin chi tiết"></textarea>
+            <textarea class="form-control" name="infoduan" id="infoduan" placeholder="Thông tin chi tiết"></textarea>
         </div>
         <div class="clearfix"></div>
     </div>
 
 
-    <!--<div class="form-group" attr-required="1">
-        <div class="col-md-4 no-padding control-label">Hạn</div>
-        <div class="col-md-8 no-padding">
-            <input class="form-control" type="text" id="timeto" name="timeto" placeholder="dd/mm/yyyy"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group rank-select">
+    <div class="form-group rank-select" attr-required="1">
         <div class="col-md-4 no-padding control-label">Chọn gói </div>
         <div class="col-md-8 no-padding">
             <div class="rank-one-select" attr-rank="1">
                 <div class="rank-one-des">Blah blah </div>
-                <div class="rank-one-title">Rank 1</div>
+                <div class="rank-one-title">rank 1</div>
             </div>
             <div class="rank-one-select" attr-rank="2">
                 <div class="rank-one-des">Bleh bleh</div>
-                <div class="rank-one-title">Rank 2</div>
+                <div class="rank-one-title">rank 2</div>
             </div>
             <div class="rank-one-select" attr-rank="3">
                 <div class="rank-one-des">Bloh bloh</div>
-                <div class="rank-one-title">Rank 3</div>
+                <div class="rank-one-title">rank 3</div>
             </div>
             <div class="clearfix"></div>
         </div>
-        <input type="hidden" name="rank" id="rank"/>
+        <input type="hidden" name="rank" id="rank" value="0"/>
         <div class="clearfix"></div>
-    </div>-->
-
-
-    <div class="user-info-input">
-        <div class="txt-with-line center">
-        	<span class="txt generate-new-button">Thông tin cá nhân <span class="fa fa-caret-down"></span></span>
-        </div>
-
-        <div class="form-group" attr-required="1">
-            <div class="col-md-4 no-padding control-label">Tên </div>
-            <div class="col-md-8 no-padding">
-                <input type="text" placeholder="Tên liên hệ" class="form-control" name="tenlienhe" id="tenlienhe"/>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="form-group" attr-required="1">
-            <div class="col-md-4 no-padding control-label">Điện thoại </div>
-            <div class="col-md-8 no-padding">
-                <input type="text" placeholder="Điện thoại liên hệ" class="form-control" name="dienthoai" id="dienthoai"/>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="form-group" attr-required="1">
-            <div class="col-md-4 no-padding control-label">Email </div>
-            <div class="col-md-8 no-padding">
-                <input type="email" placeholder="Email" class="form-control" name="email" id="email"/>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-4 no-padding control-label">Địa chỉ </div>
-            <div class="col-md-8 no-padding">
-                <input type="text" placeholder="Địa chỉ" class="form-control" name="diachi" id="diachi"/>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-
     </div>
 
-    <input type="hidden" name="typenode" value="true"/>
+    <div class="form-group">
+        <div class="col-md-4 no-padding control-label">Chọn gói (vip)</div>
+        <div class="col-md-8 no-padding">
+            <input type="text" class="form-control" name="vip" id="vip" value="0"/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
     <input type="hidden" name="latitude" id="latitude"/>
     <input type="hidden" name="longitude" id="longitude"/>
 

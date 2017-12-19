@@ -92,6 +92,9 @@ $config->addJS('dist', 'main.js'); ?>
 			<li class="one-item <?php if ($page == 'user') echo 'active' ?>" id="user">
 				<a href="<?php echo MAIN_URL ?>/user">User</a>
 			</li>
+			<li class="one-item <?php if ($page == 'mod') echo 'active' ?>" id="mod">
+				<a href="<?php echo MAIN_URL ?>/mod">Mods</a>
+			</li>
 		</ul>
 
 		<div class="form-search">

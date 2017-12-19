@@ -1,5 +1,22 @@
 <?php
-if ($n) {
+
+if ($type == 'coins') {
+    if ($mode == 'history') {
+        $pageTitle = 'History';
+        include 'templates/header.php';
+
+        $config->addJS('plugins', 'DataTables/datatables.min.js');
+    }
+    else if ($mode == 'change') {
+        $pageTitle = 'Update coin';
+        include 'templates/header.php';
+    }
+
+    $config->addJS('dist', $page.'/'.$type.'.'.$mode.'.js');
+
+    include 'templates/'.$page.'/'.$type.'.'.$mode.'.php';
+}
+else if ($n) {
     $pageTitle = 'User info';
     include 'templates/header.php';
 

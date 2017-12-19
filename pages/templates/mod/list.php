@@ -1,4 +1,4 @@
-<h2>Dự án</h2>
+<h2>Mods</h2>
 
 <form id="formFilter" class="filterBox filters">
 	<h3 class="filterBox-header">Filter</h3>
@@ -35,12 +35,13 @@
 		<thead>
 			<tr>
 			  <th>ID</th>
-  			  <th>Tiêu đề</th>
-			  <th>Loại</th>
-  			  <th>Tỉnh</th>
-  			  <th>Huyện</th>
-  			  <th>Địa chỉ</th>
-  			  <th>Giá từ</th>
+			  <th>Username</th>
+			  <th>Name</th>
+			  <th>Email</th>
+			  <th>Điện thoại</th>
+			  <th>Công ty</th>
+			  <th>Coin</th>
+			  <th>Hạng</th>
 		  </tr>
 		</thead>
 		<tbody>

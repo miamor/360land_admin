@@ -1,4 +1,4 @@
-<h2>Nodes</h2>
+<h2>Users</h2>
 
 <form id="formFilter" class="filterBox filters">
 	<h3 class="filterBox-header">Filter</h3>
@@ -35,13 +35,13 @@
 		<thead>
 			<tr>
 			  <th>ID</th>
-			  <th>Thông tin khách hàng</th>
-			  <th>Thông tin chuyến</th>
-			  <th>Tình trạng</th>
-			  <th>Giá mua ngay</th>
-			  <th>Giá khách trả</th>
-			  <th>Ưu tiên</th>
-			  <th>Taxi đã nhận</th>
+			  <th>Username</th>
+			  <th>Name</th>
+			  <th>Email</th>
+			  <th>Điện thoại</th>
+			  <th>Công ty</th>
+			  <th>Coin</th>
+			  <th>Hạng</th>
 		  </tr>
 		</thead>
 		<tbody>

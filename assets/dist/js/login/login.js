@@ -6,7 +6,7 @@ function loginForm () {
 
 function submitLoginForm () {
     $.ajax({
-        url: API_URL+'/login/mod/',
+        url: API_URL_ALL+'/login/mod/',
         type: 'post',
         data: $('#login').serialize(),
         success: function (response) {
