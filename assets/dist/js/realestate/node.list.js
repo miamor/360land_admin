@@ -43,8 +43,10 @@ function confirm (itemID) {
             },
             success: function (response) {
                 console.log(response);
-                mtip('', 'success', '', 'Confirm thành công!');
-                $a.addClass('text-success')
+                if (response.message == 'OK') {
+                    mtip('', 'success', '', 'Confirm thành công!');
+                    $a.replaceWith('<span class="row-btn-confirm text-success"><i class="fa fa-check"></i></span>')
+                }
             },
             error: function (a, b, c) {
                 console.log(a);
@@ -85,11 +87,15 @@ $(document).ready(function () {
             {
                 data: "id",
                 render : function (data, type, row) {
-                    return '<div class="row-btns"><a attr-id="'+data+'" class="row-btn-del text-danger" href="#" onclick="javascript:del(\''+data+'\'); return false"><i class="fa fa-trash"></i></a> <a attr-id="'+data+'" class="row-btn-confirm hide" href="#" onclick="javascript:confirm(\''+data+'\'); return false"><i class="fa fa-check"></i></a></div>\
-                    <a href="'+location.href+'/'+data+'">'+data+'</span>'
+                    return '<a href="'+location.href+'/'+data+'">'+data+'</a>'
                 }
             },
-            { data: "title" },
+            {
+                data: "title",
+                render : function (data, type, row) {
+                    return '<a href="'+location.href+'/'+row.id+'">'+data+'</a>'
+                }
+            },
             { data: "type" },
             { data: "tinh" },
             { data: "huyen" },
@@ -102,7 +108,18 @@ $(document).ready(function () {
             },
             { data: "area" },
             { data: "timeto"},
-            { data: "status"}
+            {
+                data: "panorama_image",
+                render : function (data, type, row) {
+                    checkCls = '';
+                    if (row.status) checkCls = 'text-success';
+
+                    confirmBtn = '<a attr-id="'+row.id+'" class="row-btn-confirm" href="#" onclick="javascript:confirm(\''+row.id+'\'); return false"><i class="fa fa-check"></i></a>';
+                    if (row.status) confirmBtn = '<span attr-id="'+row.id+'" class="row-btn-confirm '+checkCls+'"><i class="fa fa-check"></i></span>';
+
+                    return '<div class="row-btns"><a attr-id="'+row.id+'" class="row-btn-del text-danger" href="#" onclick="javascript:del(\''+row.id+'\'); return false"><i class="fa fa-trash"></i></a> '+confirmBtn+'</div>'
+                }
+            }
         ],
         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
             console.log(aData);

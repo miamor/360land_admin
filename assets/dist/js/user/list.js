@@ -44,17 +44,27 @@ $(document).ready(function () {
             {
                 data: "id",
                 render : function (data, type, row) {
-                    return '<div class="row-btns"><a attr-id="'+data+'" class="row-btn-del text-danger" href="#" onclick="javascript:del(\''+data+'\'); return false"><i class="fa fa-trash"></i></a></div>\
-                    <a href="'+location.href+'/'+data+'">'+data+'</span>'
+                    return '<a href="'+location.href+'/'+data+'">'+data+'</a>'
                 }
             },
-            { data: "username" },
+            {
+                data: "username",
+                render : function (data, type, row) {
+                    return '<a href="'+location.href+'/'+row.id+'">'+data+'</a>'
+                }
+            },
 			{ data: "name" },
 			{ data: "email" },
 			{ data: "phone" },
             { data: "company" },
             { data: "coin" },
-            { data: "rank"}
+            { data: "rank"},
+            {
+                data: "status",
+                render : function (data, type, row) {
+                    return '<div class="row-btns"><a attr-id="'+row.id+'" class="row-btn-del text-danger" href="#" onclick="javascript:del(\''+row.id+'\'); return false"><i class="fa fa-trash"></i></a></div>'
+                }
+            }
 		],
         fnRowCallback: function (nRow, aData, iDisplayIndex) {
             console.log(aData);

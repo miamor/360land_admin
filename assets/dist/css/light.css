@@ -210,7 +210,7 @@ menu h4{margin:10px 0 -1px;font-weight:600;}
 menu h3.menu-title{margin:0 0 5px;color:#369fcf}
 .menu-one-item{display: block;padding:0 10px 2px;position: relative;z-index:4;border-bottom:1px solid #eee;margin-bottom:-1px}
 .menu-one-item:hover,.menu-one-item.active{background:#84c754;color:#fff;border-color:#84c754;z-index:5}
-.menu-one-item:hover::before {content:"\f138";float:right;font-family:"FontAwesome";font-size:17px;margin-right:0;margin-top:2px}
+.menu-one-item:hover::before,.menu-one-item.active:before {content:"\f138";float:right;font-family:"FontAwesome";font-size:17px;margin-right:0;margin-top:2px}
 
 /* Main */
 main{}
@@ -316,7 +316,10 @@ body.mobile .v-user-avt{float:none;width:100%;height:180px;margin:0 auto 10px}
 table.text-center,table.text-center td,table.text-center th{text-align:center}
 .table.align th{text-align:left}
 .table.align td{text-align:right}
+.th-none{padding-right:8px!important}
+.th-none:after{display:none!important;font-size:0!important}
 
-.row-btns{float:left;margin-right:6px}
+.row-btns{text-align:center}
+.row-btns>a, .row-btns>span{font-size:20px;margin:0 3px}
 
 .hide{display:none} .hidden{display:none!important}

@@ -25,7 +25,7 @@ function submitForm () {
             var postData = objectifyForm($(this).serializeArray());
             console.log(JSON.stringify(postData));
             $.ajax({
-                url: API_URL+"/edit/",
+                url: API_URL+"/changepassword/",
                 type: "put",
                 data: postData,
                 beforeSend: function (xhr) {

@@ -1,4 +1,4 @@
-<h2>Edit my info</h2>
+<h2>Mod info || Smod info</h2>
 
 <form class="form-edit-me">
 	<div class="form-group" attr-required="1">

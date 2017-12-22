@@ -93,7 +93,7 @@ $config->addJS('dist', 'main.js'); ?>
 				<a href="<?php echo MAIN_URL ?>/user">User</a>
 			</li>
 			<li class="one-item <?php if ($page == 'mod') echo 'active' ?>" id="mod">
-				<a href="<?php echo MAIN_URL ?>/mod">Mods</a>
+				<a href="<?php echo MAIN_URL ?>/modsmod">Mods &amp; Smods</a>
 			</li>
 		</ul>
 

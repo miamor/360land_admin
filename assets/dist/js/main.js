@@ -709,6 +709,10 @@ jQuery(document).ready(function($){
 
 	logoutBtn();
 
+	if (API_URL.indexOf("manager_mod") > -1) {
+	    $(".smod-box").remove();
+	}
+
 	if (localStorage.getItem('token')) {
         __token = localStorage.getItem('token');
         if (!localStorage.getItem('user_info')) {

@@ -4,6 +4,6 @@ RewriteBase /360land_admin/
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 
-RewriteRule ^((?!(user|realestate|login|mod))[^/].+)$ index.php?page=$1
+RewriteRule ^((?!(user|realestate|login|modsmod))[^/].+)$ index.php?page=$1
 
-RewriteRule ^((user|realestate|login|mod).*) index.php?page=$1
+RewriteRule ^((user|realestate|login|modsmod).*) index.php?page=$1

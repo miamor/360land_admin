@@ -1,6 +1,6 @@
 <h2>Nodes</h2>
 
-<form id="formFilter" class="filterBox filters">
+<form id="formFilter" class="filterBox filters hide">
 	<h3 class="filterBox-header">Filter</h3>
 	<!--<div class="book-search form-group" id="bsearch">
 		<div class="col-lg-4 control-label text-right">Keyword</div>
@@ -43,7 +43,7 @@
 			  <th>Giá</th>
 			  <th>Diện tích</th>
 			  <th>Refresh cuối</th>
-			  <th>Stt</th>
+			  <th class="th-none">Action</th>
 		  </tr>
 		</thead>
 		<tbody>
