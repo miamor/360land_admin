@@ -49,12 +49,16 @@ function loadData () {
             //$('.user-name').html(response.name)
             //$('.username').html(response.username)
             for (var key in response) {
-                $('input[name="'+key+'"]').val(response[key])
+                if (key != 'sex') {
+                    $('input[name="'+key+'"]').val(response[key])
+                }
             }
 
             $('input[name="coin"]').attr('disabled', true);
-            console.log($('input[name="sex"][value="'+response[key]+'"]'));
-            $('input[name="sex"][value="'+response[key]+'"]').prop('checked', true);
+            console.log($('input[name="sex"][value="'+response.sex+'"]'));
+            $('input[name="sex"][value="'+response.sex+'"]').attr('checked', true).closest('.radio').addClass('checked');
+            //$('input[name="sex"][value="'+response.sex+'"]').prop('checked', true);
+            //$('input[name="sex"][value="'+response.sex+'"]').setState()
         },
         error: function (a, b, c) {
             console.log(a)

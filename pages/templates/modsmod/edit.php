@@ -11,7 +11,7 @@
 
 	<div class="form-group" attr-required="1">
 		<div class="col-lg-3 control-label no-padding-left">Name</div>
-		<div class="col-lg-8 no-padding">
+		<div class="col-lg-9 no-padding">
 			<input class="form-control" name="name" placeholder="Name" type="text"/>
 		</div>
 		<div class="clearfix"></div>
@@ -27,7 +27,7 @@
 
 	<div class="form-group" attr-required="1">
 		<div class="col-lg-3 control-label no-padding-left">Điện thoại</div>
-		<div class="col-lg-8 no-padding">
+		<div class="col-lg-9 no-padding">
 			<input class="form-control" name="phone" placeholder="Điện thoại" type="text"/>
 		</div>
 		<div class="clearfix"></div>
@@ -46,7 +46,7 @@
 
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Địa chỉ</div>
-		<div class="col-lg-8 no-padding">
+		<div class="col-lg-9 no-padding">
 			<input class="form-control" name="address" placeholder="Địa chỉ" type="text"/>
 		</div>
 		<div class="clearfix"></div>
@@ -54,7 +54,7 @@
 
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Birthday</div>
-		<div class="col-lg-8 no-padding">
+		<div class="col-lg-9 no-padding">
 			<input class="form-control" name="birthday" placeholder="Birthday" type="datetime"/>
 		</div>
 		<div class="clearfix"></div>
