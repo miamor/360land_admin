@@ -53,14 +53,6 @@
 	</div>
 
 	<div class="form-group">
-		<div class="col-lg-3 control-label no-padding-left">Công ty</div>
-		<div class="col-lg-8 no-padding">
-			<input class="form-control" name="company" placeholder="Công ty" type="text"/>
-		</div>
-		<div class="clearfix"></div>
-	</div>
-
-	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Birthday</div>
 		<div class="col-lg-8 no-padding">
 			<input class="form-control" name="birthday" placeholder="Birthday" type="datetime"/>
@@ -68,13 +60,6 @@
 		<div class="clearfix"></div>
 	</div>
 
-	<div class="form-group">
-		<div class="col-lg-3 control-label no-padding-left">Coins</div>
-		<div class="col-lg-9 no-padding">
-			<input class="form-control" name="coin" placeholder="coin" type="number"/>
-		</div>
-		<div class="clearfix"></div>
-	</div>
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Avatar</div>
 		<div class="col-lg-9 no-padding">
@@ -90,25 +75,6 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-
-	<div class="form-group">
-		<div class="col-lg-3 control-label no-padding-left">Rank</div>
-		<div class="col-lg-9 no-padding">
-			<input class="form-control" name="rank" placeholder="Rank" type="text"/>
-		</div>
-		<div class="clearfix"></div>
-	</div>
-
-	<div class="form-group form-type_action" attr-required="1">
-        <div class="col-lg-3 no-padding control-labels">Status </div>
-		<div class="col-lg-3 no-padding">
-            <label><input name="status" type="radio" value="true"> Activate</label>
-		</div>
-		<div class="col-lg-4 no-padding">
-            <label><input name="status" type="radio" value="false"> Deactivate</label>
-        </div>
-        <div class="clearfix"></div>
-    </div>
 
 	<div class="add-form-submit center">
 		<input type="reset" value="Reset" class="btn btn-default">
