@@ -33,7 +33,8 @@ function submitForm () {
                 },
                 success: function (response) {
                     console.log(response);
-                    mtip('', 'success', '', 'Thông tin người dùng đã được cập nhật thành công');
+                    mtip('', 'success', '', 'Mật khẩu đã được cập nhật thành công');
+                    location.reload();
                 },
                 error: function (a, b, c) {
                     console.log(a);
@@ -46,6 +47,7 @@ function submitForm () {
 }
 
 $(document).ready(function () {
+    $('[name="username"]').val(__userInfo.username);
     // submit form
     submitForm();
 })
