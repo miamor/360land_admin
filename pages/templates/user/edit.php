@@ -1,7 +1,7 @@
 <h2>Edit user info: <span class="user-name">User Name</span> <span class="gensmall username">@username</span></h2>
 
-<form class="form-edit-user">
-	<div class="form-group" attr-required="1">
+<form id="theform" class="form-edit-user">
+	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Username</div>
 		<div class="col-lg-9 no-padding">
 			<input class="form-control" name="username" type="text" placeholder="Username"/>
@@ -33,7 +33,7 @@
 		<div class="clearfix"></div>
 	</div>
 
-	<div class="form-group form-type_action" attr-required="1">
+	<div class="form-group form-type_action">
         <div class="col-lg-3 no-padding control-labels">Giới tính </div>
         <div class="col-lg-3 no-padding">
             <label><input name="sex" type="radio" value="true"> Nam</label>
@@ -83,7 +83,7 @@
 		<div class="clearfix"></div>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group hide">
 		<div class="col-lg-3 control-label no-padding-left"><i class="fa fa-facebook-square"></i> Fb ID</div>
 		<div class="col-lg-9 no-padding">
 			<input class="form-control" name="oauth_uid" placeholder="Facebook oauth uid" type="text"/>
@@ -99,7 +99,7 @@
 		<div class="clearfix"></div>
 	</div>
 
-	<div class="form-group form-type_action" attr-required="1">
+	<div class="form-group form-type_action">
         <div class="col-lg-3 no-padding control-labels">Status </div>
 		<div class="col-lg-3 no-padding">
             <label><input name="status" type="radio" value="true"> Activate</label>

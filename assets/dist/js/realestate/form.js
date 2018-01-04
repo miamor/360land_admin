@@ -21,6 +21,8 @@ var nodeID = splitURL[splitURL.length-1];
             if (submitType == 'edit') {
                 if (nodeType == 'project') {
                     this.loadDataProject();
+                } else if (nodeType == 'service') {
+                    this.loadDataService();
                 } else {
                     this.loadDataNode()
                 }
@@ -32,7 +34,7 @@ var nodeID = splitURL[splitURL.length-1];
                 center: placeLatLng
             });
 
-            if (nodeType != 'project') {
+            if (nodeType != 'project' && nodeType != 'service') {
                 google.maps.event.addListenerOnce($thismap.map, 'idle', function () {
                     $('.map_select').hide();
                 });
@@ -165,6 +167,8 @@ var nodeID = splitURL[splitURL.length-1];
         this.submitForm = function () {
             if (nodeType == 'project') {
                 $thismap.submitProject()
+            } else if (nodeType == 'service') {
+                $thismap.submitService()
             } else {
                 $thismap.submitNode()
             }
@@ -430,6 +434,75 @@ var nodeID = splitURL[splitURL.length-1];
         }
 
 
+        this.submitService = function () {
+            $('#'+v).submit(function () {
+                var ok = true;
+                $('[attr-required="1"]').not('.form-adr,.form-price').each(function () {
+                    var val = $(this).find('input,select,textarea').val();
+                    if ( !val || val == "CN" ) {
+                        console.log('Missing parameters');
+                        mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
+                        ok = false;
+                        return false;
+                    }
+                });
+                if (ok) {
+                    var postData = objectifyForm($(this).serializeArray());
+                    if (submitType == 'add') $thismap.addService(postData)
+                    else if (submitType == 'edit') $thismap.editService(postData)
+                } else {
+                    console.log('not ok~');
+                    mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
+                }
+
+                return false
+            });
+        }
+
+        this.addService = function (postData) {
+            console.log('ajax post');
+            //var postData = $(this).serialize();
+            $.ajax({
+                url: API_URL+'/servicenodes/',
+                type: 'post',
+                data: postData,
+                datatype: 'json',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', __token);
+                },
+                success: function (response) {
+                    console.log(response);
+                    mtip('', 'success', '', 'Tiện ích đã được thêm thành công');
+                },
+                error: function (a, b, c) {
+                    console.log(a);
+                    mtip('', 'error', '', 'Lỗi hệ thống! Vui lòng liên hệ với quản trị viên để được hỗ trợ sớm nhất!');
+                }
+            })
+        }
+
+        this.editService = function (postData) {
+            console.log('ajax post PUT '+API_URL+'/servicenodes/'+nodeID+'/');
+            console.log(postData);
+            //var postData = $(this).serialize();
+            $.ajax({
+                url: API_URL+'/servicenodes/'+nodeID+'/',
+                type: 'put',
+                data: postData,
+                datatype: 'json',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', __token);
+                },
+                success: function (response) {
+                    console.log(response);
+                    mtip('', 'success', '', 'Tiện ích đã được cập nhật thành công');
+                },
+                error: function (a, b, c) {
+                    console.log(a);
+                    mtip('', 'error', '', 'Lỗi hệ thống! Vui lòng liên hệ với quản trị viên để được hỗ trợ sớm nhất!');
+                }
+            })
+        }
 
 
         this.changeCityCallback = function () {
@@ -619,6 +692,32 @@ var nodeID = splitURL[splitURL.length-1];
                             })
                         }
                     })
+                },
+                error: function (a, b, c) {
+                    console.log(a);
+                }
+            })
+        }
+
+        this.loadDataService = function () {
+            $.ajax({
+                url: API_URL+'/servicenodes/'+nodeID+'/',
+                type: 'get',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', __token);
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (response.message) {
+                        $('#main-content main').html('No item found');
+                        return false;
+                    }
+
+                    response = response.data;
+                    $('.node_title').html(response.name);
+                    for (var key in response) {
+                        $('input[name="'+key+'"], .form-group:not(".form-adr") select[name="'+key+'"], textarea[name="'+key+'"]').val(response[key])
+                    }
                 },
                 error: function (a, b, c) {
                     console.log(a);

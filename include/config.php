@@ -96,7 +96,8 @@ class Config {
 	function echoJS () {
 		$exJS = explode('|', $this->JS);
 		foreach ($exJS as $exjs) {
-			if ($exjs) echo '<script src="'.$exjs.'"></script>';
+			if ($exjs) echo '
+	<script src="'.$exjs.'"></script>';
 		}
 	}
 

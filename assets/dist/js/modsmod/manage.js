@@ -40,7 +40,7 @@ function del (itemID) {
 $(document).ready(function () {
     $('#buyList').DataTable({
         ajax: {
-            url: API_URL+"/allmod/",
+            url: API_URL+"/"+typeURL+"s/",
             type: "get",
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', __token);
@@ -50,7 +50,17 @@ $(document).ready(function () {
 			{ data: "name" },
 			{ data: "phone" },
             { data: "email" },
-            { data: "address" }
+            { data: "address" },
+            {
+                data: "status",
+                render : function (data, type, row) {
+                    if (__uType == 'smod') {
+                        return '<div class="row-btns"><a attr-id="'+row.id+'" class="row-btn-edit" href="'+location.href+'/'+row.id+'"><i class="fa fa-pencil"></i></a> <a attr-id="'+row.id+'" class="row-btn-del text-danger" href="#" onclick="javascript:del(\''+row.id+'\'); return false"><i class="fa fa-trash"></i></a></div>'
+                    } else {
+                        return '<div class="row-btns"><a attr-id="'+row.id+'" class="row-btn-edit" href="'+location.href+'/'+row.id+'"><i class="fa fa-eye"></i></a></div>'
+                    }
+                }
+            }
 		],
         fnRowCallback: function (nRow, aData, iDisplayIndex) {
             console.log(aData);

@@ -4,10 +4,12 @@
     <h4 class="menu-one-box-header">Mods</h4>
     <div class="menu-one-box-body">
         <a class="menu-one-item" href="<?php echo $config->mLink ?>">List all</a>
+        <a class="menu-one-item smod-box" href="<?php echo $config->mLink ?>?mode=manage">List all (thuộc quyền)</a>
+        <a class="menu-one-item smod-box" href="<?php echo $config->mLink ?>?mode=new">Add new</a>
     </div>
 </div>
 
-<div class="menu-one-box smod-box">
+<div class="menu-one-box smod-box hidden">
     <h4 class="menu-one-box-header">Smods</h4>
     <div class="menu-one-box-body">
         <a class="menu-one-item" href="<?php echo $config->sLink ?>">List all</a>

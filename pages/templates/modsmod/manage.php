@@ -1,15 +1,14 @@
-<h2>Tiện ích</h2>
+<h2>Mods || Smods</h2>
 
 <div class="">
 	<table id="buyList" class="table table-bordered table-striped">
 		<thead>
 			<tr>
-			  <th>ID</th>
 			  <th>Name</th>
-			  <th>Details</th>
-			  <th>Group</th>
-			  <th>Type</th>
-			  <th>Action</th>
+			  <th>Email</th>
+			  <th>Điện thoại</th>
+			  <th>Địa chỉ</th>
+			  <th class="th-none">Action</th>
 		  </tr>
 		</thead>
 		<tbody>

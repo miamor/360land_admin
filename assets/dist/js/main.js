@@ -43,7 +43,8 @@
 
 
 var isMobile = ($(window).width() <= 500 ? true : false);
-var API_URL = '//45.119.82.40:8000/manager_mod';
+var __uType = (localStorage.getItem('uType') ? localStorage.getItem('uType') : 'mod');
+var API_URL = '//45.119.82.40:8000/manager_'+__uType;
 var API_URL_ALL = API_URL.split('/manager_')[0];
 var __token = __userInfo = null;
 
@@ -84,6 +85,7 @@ $.fn.digits = function(){
 }
 
 function getUserInfo () {
+	console.log(API_URL);
     $.ajax({
         url: API_URL+'/info/',
         type: 'get',

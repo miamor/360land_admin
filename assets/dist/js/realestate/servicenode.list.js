@@ -1,10 +1,3 @@
-var splitURL = location.href.split('?')[0].split('/');
-var typeURL = splitURL[splitURL.length-1];
-
-if (typeURL == 'mod') $('main>h2').text('Mods');
-else $('main>h2').text('Smods');
-console.log(API_URL+"/"+typeURL+"s/");
-
 function del (itemID) {
     $a = $('a[attr-id="'+itemID+'"]');
     console.log('del '+itemID+' called!');
@@ -16,7 +9,7 @@ function del (itemID) {
             row.remove();*/
 
             $.ajax({
-                url: API_URL+'/mods/'+itemID+'/',
+                url: API_URL+'/servicenodes/'+itemID+'/',
                 type: 'delete',
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader('Authorization', __token);
@@ -37,22 +30,41 @@ function del (itemID) {
     return false
 }
 
+
+var table;
 $(document).ready(function () {
-    $('#buyList').DataTable({
-        ajax: {
-            url: API_URL+"/allmod/",
-            type: "get",
-            beforeSend: function (xhr) {
+    table = $('#buyList').DataTable({
+        "ajax": {
+            "url": API_URL+"/servicenodes/",
+            "type": "GET",
+            "beforeSend": function (xhr) {
                 xhr.setRequestHeader('Authorization', __token);
             }
         },
-		columns: [
-			{ data: "name" },
-			{ data: "phone" },
-            { data: "email" },
-            { data: "address" }
+		"columns": [
+            {
+                data: "id",
+                render : function (data, type, row) {
+                    return '<a href="'+location.href+'/'+data+'">'+data+'</a>'
+                }
+            },
+            {
+                data: "name",
+                render : function (data, type, row) {
+                    return '<a href="'+location.href+'/'+row.id+'">'+data+'</a>'
+                }
+            },
+            { data: "details" },
+			{ data: "group" },
+			{ data: "type" },
+            {
+                data: "latitude",
+                render : function (data, type, row) {
+                    return '<div class="row-btns"><a attr-id="'+row.id+'" class="row-btn-edit" href="'+location.href+'/'+row.id+'"><i class="fa fa-pencil"></i></a> <a attr-id="'+row.id+'" class="row-btn-del text-danger" href="#" onclick="javascript:del(\''+row.id+'\'); return false"><i class="fa fa-trash"></i></a></div>'
+                }
+            },
 		],
-        fnRowCallback: function (nRow, aData, iDisplayIndex) {
+        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
             console.log(aData);
             /*if (aData.taxiid != null) {
                 $(nRow).addClass('taken');

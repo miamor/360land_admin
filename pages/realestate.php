@@ -21,7 +21,7 @@ if ($n) {
         $config->addJS('dist', $page.'/form.js');
         $config->addJS('dist', $page.'/'.$n.'.edit.js');
 
-        $config->addJS('dist', $page.'/'.$n.'.view.js');
+        if ($n != 'servicenode') $config->addJS('dist', $page.'/'.$n.'.view.js');
 
         include 'templates/'.$page.'/'.$n.'.view.php';
 

@@ -14,9 +14,9 @@ if ($n) {
             $pageTitle = 'Update my info';
             include 'templates/header.php';
 
-            $config->addJS('dist', $page.'/edit.js');
+            $config->addJS('dist', $page.'/me.js');
 
-        	include 'templates/'.$page.'/edit.php';
+        	include 'templates/'.$page.'/me.php';
         }
     }
     else {
@@ -27,9 +27,27 @@ if ($n) {
             //$config->addJS('plugins', 'DataTables/datatables.min.js');
             //$config->addJS('dist', 'ratings.min.js');
             //echo '<link rel="stylesheet" href="'+PLUGINS+'/morris/morris.css">';
+
+            $config->addJS('dist', $page.'/form.js');
             $config->addJS('dist', $page.'/view.js');
 
             include 'templates/'.$page.'/view.php';
+        } else if ($mode == 'new') {
+            $pageTitle = 'Add new';
+            include 'templates/header.php';
+
+            $config->addJS('dist', $page.'/form.js');
+            $config->addJS('dist', $page.'/'.$mode.'.js');
+
+            include 'templates/'.$page.'/'.$mode.'.php';
+        } else if ($mode == 'manage') {
+            $pageTitle = 'List all (manage)';
+            include 'templates/header.php';
+
+            $config->addJS('plugins', 'DataTables/datatables.min.js');
+            $config->addJS('dist', $page.'/'.$mode.'.js');
+
+            include 'templates/'.$page.'/'.$mode.'.php';
         } else {
             $pageTitle = 'Mods list';
             include 'templates/header.php';

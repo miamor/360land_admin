@@ -1,4 +1,4 @@
-<h2><i class="fa fa-map-marker"></i> Thêm tiện ích</h2>
+<h2><i class="fa fa-map-marker"></i> Sửa tiện ích</h2>
 
 
 <form id="theform" class="place-add">
