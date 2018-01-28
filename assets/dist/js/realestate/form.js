@@ -4,7 +4,8 @@ var options = {district: ''};
 var c_city = district = null;
 var cityList = [];
 
-var splitURL = location.href.split('/');
+var _URL = location.href.split('?')[0];
+var splitURL = _URL.split('/');
 var nodeID = splitURL[splitURL.length-1];
 
 (function($) {
@@ -285,6 +286,7 @@ var nodeID = splitURL[splitURL.length-1];
                 success: function (response) {
                     console.log(response);
                     mtip('', 'success', '', 'Tin bài đã được đăng thành công');
+                    location.href = MAIN_URL+'/realestate/node';
                 },
                 error: function (a, b, c) {
                     console.log(a);
@@ -346,11 +348,11 @@ var nodeID = splitURL[splitURL.length-1];
                     }
                 }
 
-                if (!$('#rank').val()) {
+                /*if (!$('#rank').val()) {
                     ok = false;
                     console.log('Missing parameters (rank)');
                     mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
-                }
+                }*/
 
                 if (!$('#price_giatri').val()) {
                     ok = false;
@@ -403,6 +405,7 @@ var nodeID = splitURL[splitURL.length-1];
                 success: function (response) {
                     console.log(response);
                     mtip('', 'success', '', 'Dự án đã được đăng thành công');
+                    location.href = MAIN_URL+'/realestate/project';
                 },
                 error: function (a, b, c) {
                     console.log(a);
@@ -473,6 +476,7 @@ var nodeID = splitURL[splitURL.length-1];
                 success: function (response) {
                     console.log(response);
                     mtip('', 'success', '', 'Tiện ích đã được thêm thành công');
+                    location.href = MAIN_URL+'/realestate/servicenode';
                 },
                 error: function (a, b, c) {
                     console.log(a);
@@ -667,10 +671,21 @@ var nodeID = splitURL[splitURL.length-1];
                     for (var key in response) {
                         $('input[name="'+key+'"], .form-group:not(".form-adr") select[name="'+key+'"], textarea[name="'+key+'"]').val(response[key])
                     }
+                    if (key == 'uutien') {
+                        $('select[name="'+key+'"] option[value="'+response[key]+'"]').attr('selected');
+                    }
+
                     $('#type_').val(response.type).attr('disabled', true);
 
-                    $('#price_giatri').val(response.pricefrom);
-                    $('#price_donvi').val('b');
+                    if (response.pricefrom > 0) {
+                        $('#price_giatri').val(response.pricefrom);
+                        $('#price_donvi').val('b');
+                        $('select#price_donvi option[value="b"]').attr('selected');
+                    } else {
+                        $('#price_giatri').val(response.pricefrom*100);
+                        $('#price_donvi').val('m');
+                        $('select#price_donvi option[value="m"]').attr('selected');
+                    }
 
                     if (response.thumbs) {
                         response.thumbsTxt = response.thumbs.implode('|');

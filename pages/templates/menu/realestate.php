@@ -24,3 +24,11 @@
         <a class="menu-one-item" href="<?php echo $config->snLink.'?mode=new' ?>">Add new</a>
     </div>
 </div>
+
+<div class="menu-one-box hidden">
+    <h4 class="menu-one-box-header">Tiến độ dự án</h4>
+    <div class="menu-one-box-body">
+        <a class="menu-one-item" href="<?php echo $config->tdLink ?>">List all</a>
+        <a class="menu-one-item" href="<?php echo $config->tdLink.'?mode=new' ?>">Add new</a>
+    </div>
+</div>

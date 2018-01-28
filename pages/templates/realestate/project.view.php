@@ -5,6 +5,7 @@
     <ul class="nav nav-tabs">
         <li class="stat active"><a href="#stat" data-toggle="tab" aria-expanded="false">Thống kê</a></li>
         <li class="edit"><a href="#edit" data-toggle="tab" aria-expanded="true">Sửa thông tin</a></li>
+        <li class="tiendo"><a href="#progress" data-toggle="tab" aria-expanded="true">Tiến độ dự án</a></li>
     </ul>
 
     <div class="tab-content">
@@ -20,6 +21,10 @@
 
         <div class="tab-pane hide" id="edit">
             <?php include 'project.edit.php' ?>
+        </div>
+
+        <div class="tab-pane hide" id="progress">
+            <?php include 'project.progress.php' ?>
         </div>
     </div>
 </div>

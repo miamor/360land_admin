@@ -36,6 +36,7 @@ class Config {
 		$this->nLink = $this->eLink.'/node';
 		$this->pLink = $this->eLink.'/project';
 		$this->snLink = $this->eLink.'/servicenode';
+		$this->tdLink = $this->eLink.'/progress';
 		$this->smLink = MAIN_URL.'/modsmod';
 		$this->mLink = $this->smLink.'/mod';
 		$this->sLink = $this->smLink.'/smod';

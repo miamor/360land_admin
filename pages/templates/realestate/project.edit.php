@@ -159,13 +159,13 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="form-group">
+    <!--<div class="form-group">
         <div class="col-lg-3 no-padding control-label">Tiến độ </div>
         <div class="col-lg-9 no-padding">
             <input type="text" placeholder="Tiến độ" class="form-control" name="tiendo" id="tiendo"/>
         </div>
         <div class="clearfix"></div>
-    </div>
+    </div>-->
 
     <div class="form-group">
         <div class="col-lg-3 no-padding control-label">Giới thiệu </div>
@@ -184,31 +184,15 @@
     </div>
 
 
-    <div class="form-group rank-select" attr-required="1">
-        <div class="col-lg-3 no-padding control-label">Chọn gói </div>
-        <div class="col-lg-9 no-padding">
-            <div class="rank-one-select" attr-rank="1">
-                <div class="rank-one-des">Blah blah </div>
-                <div class="rank-one-title">rank 1</div>
-            </div>
-            <div class="rank-one-select" attr-rank="2">
-                <div class="rank-one-des">Bleh bleh</div>
-                <div class="rank-one-title">rank 2</div>
-            </div>
-            <div class="rank-one-select" attr-rank="3">
-                <div class="rank-one-des">Bloh bloh</div>
-                <div class="rank-one-title">rank 3</div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <input type="hidden" name="rank" id="rank" value="0"/>
-        <div class="clearfix"></div>
-    </div>
-
     <div class="form-group">
-        <div class="col-lg-3 no-padding control-label">Chọn gói (vip)</div>
+        <div class="col-lg-3 no-padding control-label">Chọn gói (ưu tiên)</div>
         <div class="col-lg-9 no-padding">
-            <input type="text" class="form-control" name="vip" id="vip" value="0"/>
+            <select id="uutien" name="uutien" class="form-control">
+                <option value="0">Không ưu tiên</option>
+                <option value="1">Phường</option>
+                <option value="2">Quận/Huyện</option>
+                <option value="3">Tỉnh/Thành phố</option>
+            </select>
         </div>
         <div class="clearfix"></div>
     </div>
