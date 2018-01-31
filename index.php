@@ -20,6 +20,8 @@ else $__page = $__page;
 $__pageAr = array_values(array_filter(explode('/', explode('?', rtrim($__page))[0])));
 //$__pageAr = array_filter(explode('/', explode('&', rtrim($__page))[0]));
 //print_r($__pageAr);
+$n = null;
+
 if ($__pageAr) {
 	$page = $__pageAr[0];
 	$n = (array_key_exists(1, $__pageAr) && $__pageAr[1]) ? $__pageAr[1] : null;
@@ -41,7 +43,7 @@ $_id = $config->get('id');
 if ($do) header('Content-Type: text/plain; charset=utf-8');
 else header('Content-Type: text/html; charset=utf-8');
 
-if (!isset($page) || !$page) $page = 'index';
+if (!isset($page) || !$page) $page = 'realestate';
 
 //$page_ = $page;
 

@@ -1,9 +1,3 @@
-function loginForm () {
-    $('#login').submit(function () {
-        submitLoginForm();
-    })
-}
-
 function submitLoginForm () {
     var type = $('#login [name="type"]:checked').val();
     $.ajax({
@@ -49,6 +43,7 @@ $(document).ready(function () {
         location.href = MAIN_URL;
         //window.history.back();
     } else {
-        loginForm();
+        $('menu').hide();
+        $('main').removeClass('col-lg-9').addClass('col-lg-12');
     }
 })

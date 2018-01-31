@@ -3,7 +3,7 @@
 <div class="menu-one-box">
     <h4 class="menu-one-box-header">Nodes</h4>
     <div class="menu-one-box-body">
-        <a class="menu-one-item" href="<?php echo $config->nLink ?>?mode=stat">Stat</a>
+        <a class="menu-one-item hidden" href="<?php echo $config->nLink ?>?mode=stat">Stat</a>
         <a class="menu-one-item" href="<?php echo $config->nLink ?>">List all</a>
         <a class="menu-one-item" href="<?php echo $config->nLink.'?mode=new' ?>">Add new</a>
     </div>

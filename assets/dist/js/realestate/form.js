@@ -179,7 +179,7 @@ var nodeID = splitURL[splitURL.length-1];
         this.submitNode = function () {
             $('#'+v).submit(function () {
                 var ok = true;
-                $('[attr-required="1"]').not('.form-adr,.form-price,.form-type').each(function () {
+                $('[attr-required="1"]').not('.form-adr,.form-price,.form-type, .form-time').each(function () {
                     var val = $(this).find('input,select,textarea').val();
                     var $fgr = $(this).closest('.form-group');
                     var isCustomField = $fgr.is('.customshow');
@@ -230,6 +230,25 @@ var nodeID = splitURL[splitURL.length-1];
                     mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc (price_giatri)');
                 }
 
+                if (!$('#timefrom').val() || !$('#timeto').val()) {
+                    ok = false;
+                    console.log('Missing parameters (timefrom || timeto)');
+                    mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc (price_giatri)');
+                } else {
+                    var today = new Date();
+                    today.setHours(0,0,0,0);
+                    var timefrom = new Date($('#timefrom').val()).getTime();
+                    var timeto = new Date($('#timeto').val()).getTime();
+                    if (timefrom < today) {
+                        ok = false;
+                        console.log('timefrom < today');
+                        mtip('', 'error', '', 'Thời gian không thể bắt đầu từ trước ngày hôm nay');
+                    } else if (timefrom > timeto) {
+                        ok = false;
+                        console.log('timefrom > timeto');
+                        mtip('', 'error', '', 'Thời gian không hợp lệ (thời gian kết thúc < thời gian bắt đầu)');
+                    }
+                }
 
                 var postData = objectifyForm($(this).serializeArray());
 
@@ -239,7 +258,10 @@ var nodeID = splitURL[splitURL.length-1];
                     postData.price = postData.price_giatri/1000;
                 }
 
-                postData.rank = parseInt(postData.rank);
+                postData.vip = parseInt(postData.rank);
+                delete postData['rank'];
+                //postData.rank = parseInt(postData.rank);
+
                 if (!postData.area) postData.area = 0;
                 postData.area = parseInt(postData.area);
                 if (!postData.sophongngu) postData.sophongngu = 0;
@@ -248,9 +270,9 @@ var nodeID = splitURL[splitURL.length-1];
                 postData.latitude = parseFloat(postData.latitude);
                 postData.longitude = parseFloat(postData.longitude);
 
-                if (submitType == 'add') {
-                    postData.timefrom = postData.timeto = new Date().toISOString().replace(/T.*/,'');
-                }
+                //if (submitType == 'add') {
+                //    postData.timefrom = postData.timeto = new Date().toISOString().replace(/T.*/,'');
+                //}
 
                 postData.tinh = $('#city option:selected').text();
                 postData.huyen = $('#district option:selected').text();
@@ -369,7 +391,9 @@ var nodeID = splitURL[splitURL.length-1];
                     postData.pricefrom = postData.price_giatri/1000;
                 }
 
-                postData.rank = parseInt(postData.rank);
+                postData.vip = parseInt(postData.rank);
+                delete postData['rank'];
+                //postData.rank = parseInt(postData.rank);
 
                 postData.latitude = parseFloat(postData.latitude);
                 postData.longitude = parseFloat(postData.longitude);

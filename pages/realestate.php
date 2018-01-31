@@ -2,6 +2,9 @@
 for ($i = 1; $i <= 4; $i++) $config->addJS('dist', $page.'/cityListOther'.$i.'.js');
 
 $id = (isset($__pageAr[2]) ? $__pageAr[2] : null);
+
+if (!$n) $n = 'node';
+
 if ($n) {
     if ($id) {
         $pageTitle = $id;
@@ -57,7 +60,7 @@ if ($n) {
             include 'templates/'.$page.'/'.$n.'.view.php';
         }
 
-    } else if ($mode == 'add') {
+    } else if ($mode == 'new') {
 
             $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyACkc-PYhlnPUWJaV2GlcCiEcuJujZsMdc&libraries=places');
             $config->addJS('dist', $page.'/form.js');

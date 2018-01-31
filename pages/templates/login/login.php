@@ -1,6 +1,6 @@
-<div class="col-lg-1"></div>
+<div class="col-lg-2"></div>
 
-<div class="col-lg-10 no-padding" style="margin:15px 0">
+<div class="col-lg-8 no-padding" style="margin:15px 0">
     <h4 class="with-border page-title show">Đăng nhập</h4>
     <form id="login" onsubmit="return submitLoginForm()" style="margin-top:15px">
         <div class="form-group">
@@ -40,5 +40,5 @@
     </form>
 </div>
 
-<div class="col-lg-1"></div>
+<div class="col-lg-2"></div>
 <div class="clearfix"></div>
