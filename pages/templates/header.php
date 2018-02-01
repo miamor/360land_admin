@@ -48,36 +48,6 @@ $config->addJS('dist', 'main.js'); ?>
 					<span class="hidden myID"></span>
 					<div class="clearfix"></div>
 				</a>
-				<ul class="dropdown-menu with-triangle pull-right">
-					<li class="user-header">
-						<img src="<?php echo MAIN_URL ?>/data/avt.png" id="meinfo_avt" class="img-circle" alt="User Image">
-						<p><span id="meinfo_name"></span> - <small id="meinfo_uname">@tutu</small></p>
-					</li>
-					<!-- Menu Body -->
-					<li class="user-body u-sta sta-list">
-						<div class="sta-one u-coins">
-							<strong id="meinfo_coins"></strong>
-							coins
-						</div>
-						<div class="sta-one u-hh">
-							<strong id="meinfo_hh">12</strong>
-							hh
-						</div>
-						<div class="sta-one u-kk">
-							<strong id="meinfo_kk">5</strong>
-							kk
-						</div>
-					</li>
-					<!-- Menu Footer-->
-					<li class="user-footer">
-						<div class="pull-left">
-							<a class="btn btn-success btn-flat" id="meinfo_profile_link" href="#">Profile</a>
-						</div>
-						<div class="pull-right">
-							<a class="btn btn-danger btn-flat" href="<?php echo MAIN_URL ?>/logout">Logout</a>
-						</div>
-					</li>
-				</ul>
 			</div>
 		</div>
 
