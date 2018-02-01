@@ -13,5 +13,6 @@
     <div class="menu-one-box-body">
         <a class="menu-one-item" href="<?php echo $config->uLink.'?type=coins&mode=history' ?>">History</a>
         <a class="menu-one-item" href="<?php echo $config->uLink.'?type=coins&mode=change' ?>">Change coin</a>
+        <a class="menu-one-item" href="<?php echo $config->uLink.'?type=coins&mode=request' ?>">Yêu cầu nạp tiền</a>
     </div>
 </div>

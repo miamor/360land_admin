@@ -11,6 +11,12 @@ if ($type == 'coins') {
         $pageTitle = 'Update coin';
         include 'templates/header.php';
     }
+    else if ($mode == 'request') {
+        $pageTitle = 'Yêu cầu nạp tiền';
+        include 'templates/header.php';
+
+        $config->addJS('plugins', 'DataTables/datatables.min.js');
+    }
 
     $config->addJS('dist', $page.'/'.$type.'.'.$mode.'.js');
 
