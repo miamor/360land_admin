@@ -26,7 +26,7 @@ if ($n) {
 
             //include 'templates/'.$page.'/'.$n.'.stat.php';
         } else if ($mode == 'edit') {
-            $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyACkc-PYhlnPUWJaV2GlcCiEcuJujZsMdc&libraries=places');
+            $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key='.GG_API_KEY.'&libraries=places');
             $config->addJS('dist', $page.'/form.js');
             $config->addJS('dist', $page.'/'.$n.'.edit.js');
 
@@ -48,7 +48,7 @@ if ($n) {
         } else {
             $config->addJS('plugins', 'chartjs/Chart.min.js');
 
-            $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyACkc-PYhlnPUWJaV2GlcCiEcuJujZsMdc&libraries=places');
+            $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key='.GG_API_KEY.'&libraries=places');
             $config->addJS('dist', $page.'/form.js');
             $config->addJS('dist', $page.'/'.$n.'.edit.js');
     
@@ -62,7 +62,7 @@ if ($n) {
 
     } else if ($mode == 'new') {
 
-            $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyACkc-PYhlnPUWJaV2GlcCiEcuJujZsMdc&libraries=places');
+            $config->addJS(-1, 'https://maps.googleapis.com/maps/api/js?v=3&key='.GG_API_KEY.'&libraries=places');
             $config->addJS('dist', $page.'/form.js');
 
         $config->addJS('dist', $page.'/'.$n.'.'.$mode.'.js');
