@@ -2,7 +2,7 @@ var table;
 $(document).ready(function () {
     table = $('#buyList').DataTable({
         ajax: {
-            url: API_URL+"/danhsachthongbaochinh/",
+            url: API_URL+"/danhsachthongbaodagui/",
             type: "get",
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', __token);

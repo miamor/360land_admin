@@ -116,8 +116,12 @@ function setUserInfoNav () {
     $('#meinfo_coins').text(__userInfo.coin);
     $('#meinfo_profile_link').attr('href', MAIN_URL+'/user/'+__userInfo.username);
 
+	if (__userInfo.typemod != 1) {
+		$('.menu-one-item[href*="user?type=coins&mode=request"]').remove();
+	}
+
     if (isMobile) {
-        $('.nav-user-mobile').show().html('<a href="'+MAIN_URL+'/user/'+__userInfo.username+'">'+$('.nav-user .dropdown > a').html()+'</a>');
+        //$('.nav-user-mobile').show().html('<a href="'+MAIN_URL+'/user/'+__userInfo.username+'">'+$('.nav-user .dropdown > a').html()+'</a>');
     }
 }
 
@@ -736,11 +740,6 @@ jQuery(document).ready(function($){
 		});
 		if ($('#right-side').length) runChat();
 		$('.menu-one-item[href="'+window.location.href+'"]').addClass('active');
-
-		if (__userInfo.typemod != 1) {
-			$('.menu-one-item[href*="user?type=coins&mode=request"]').remove();
-		}
-
 	} else {
 		if (location.href.indexOf('login') <= -1) location.href = MAIN_URL+'/login';
         $('.nav-user #me_login_link').show();

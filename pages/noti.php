@@ -9,6 +9,7 @@ if ($id) $file = $mode.'.one';
 if ($mode == 'all') {
     if ($id) {
         $pageTitle = 'Thông báo chính';
+        $config->addJS('dist', $page.'/form.js');
     } else {
         $pageTitle = 'Danh sách thông báo chính';
 
