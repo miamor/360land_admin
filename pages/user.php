@@ -1,5 +1,7 @@
 <?php
 
+if (!$n) header('Location: '.$config->uLink);
+
 if ($type == 'coins') {
     if ($mode == 'history') {
         $pageTitle = 'History';

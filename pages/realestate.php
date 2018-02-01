@@ -3,7 +3,8 @@ for ($i = 1; $i <= 4; $i++) $config->addJS('dist', $page.'/cityListOther'.$i.'.j
 
 $id = (isset($__pageAr[2]) ? $__pageAr[2] : null);
 
-if (!$n) $n = 'node';
+//if (!$n) $n = 'node';
+if (!$n) header('Location: '.$config->nLink);
 
 if ($n) {
     if ($id) {

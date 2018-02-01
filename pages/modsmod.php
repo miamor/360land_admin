@@ -1,5 +1,8 @@
 <?php
 $id = (isset($__pageAr[2]) ? $__pageAr[2] : null);
+
+if (!$n) header('Location: '.$config->mLink);
+
 if ($n) {
     if ($n == 'me') {
         if ($mode == 'changepassword') {
