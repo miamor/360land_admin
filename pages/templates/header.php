@@ -38,9 +38,7 @@ $config->addJS('dist', 'main.js'); ?>
 <body>
 
 <header>
-	<div class="header_top">
-		<div class="logo left">360land admin</div>
-
+	<nav id="top_navbar" class="header_top navbar navbar-static-top">
 		<div class="nav-user right">
 			<a class="hide" id="me_login_link" href="<?php echo MAIN_URL ?>/login">Đăng nhập</a>
 			<div class="dropdown hide" id="me_dropdown_info">
@@ -83,8 +81,6 @@ $config->addJS('dist', 'main.js'); ?>
 			</div>
 		</div>
 
-	</div>
-	<nav id="top_navbar" class="navbar navbar-static-top">
 		<ul class="items-list">
 			<li class="one-item <?php if ($page == 'realestate') echo 'active' ?>" id="realestate">
 				<a href="<?php echo MAIN_URL ?>/realestate">Nodes &amp; Projects</a>
@@ -96,13 +92,6 @@ $config->addJS('dist', 'main.js'); ?>
 				<a href="<?php echo MAIN_URL ?>/modsmod">Mods &amp; Smods</a>
 			</li>
 		</ul>
-
-		<div class="form-search">
-			<form class="search-form">
-				<input name="keywords" class="search-input" placeholder="Input something..." type="text">
-				<div id="search_button" class="search-button"></div>
-			</form>
-		</div>
 
 	</nav>
 </header>

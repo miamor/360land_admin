@@ -20,10 +20,10 @@
 
         <div class="form-group">
             <div class="col-lg-3 control-label">Đăng nhập với tư cách</div>
-            <div class="col-lg-3 no-padding">
+            <div class="col-lg-3">
                 <label><input name="type" type="radio" checked value="mod"> Mod</label>
     		</div>
-    		<div class="col-lg-3 no-padding">
+    		<div class="col-lg-3">
                 <label><input name="type" type="radio" value="smod"> Smod</label>
             </div>
             <div class="clearfix"></div>
