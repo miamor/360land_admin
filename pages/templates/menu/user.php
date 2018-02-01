@@ -3,7 +3,8 @@
 <div class="menu-one-box">
     <h4 class="menu-one-box-header">Users</h4>
     <div class="menu-one-box-body">
-        <a class="menu-one-item" href="<?php echo $config->uLink ?>">List all</a>
+        <a class="menu-one-item" href="<?php echo $config->uLink ?>">Danh sách thành viên</a>
+        <a class="menu-one-item" href="<?php echo $config->uLink.'?mode=waiting' ?>">Đang chờ kiểm duyệt</a>
         <a class="menu-one-item" href="<?php echo $config->uLink.'?mode=new' ?>">Add new</a>
     </div>
 </div>

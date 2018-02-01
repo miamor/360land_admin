@@ -59,8 +59,11 @@ $config->addJS('dist', 'main.js'); ?>
 			<li class="one-item <?php if ($page == 'user') echo 'active' ?>" id="user">
 				<a href="<?php echo MAIN_URL ?>/user">User</a>
 			</li>
-			<li class="one-item <?php if ($page == 'mod') echo 'active' ?>" id="mod">
+			<li class="one-item <?php if ($page == 'modsmod') echo 'active' ?>" id="mod">
 				<a href="<?php echo MAIN_URL ?>/modsmod">Mods &amp; Smods</a>
+			</li>
+			<li class="one-item <?php if ($page == 'noti' || $page == 'feedback' || $page == 'ratings') echo 'active' ?>" id="others">
+				<a href="<?php echo MAIN_URL ?>/noti">Others</a>
 			</li>
 		</ul>
 
@@ -70,6 +73,7 @@ $config->addJS('dist', 'main.js'); ?>
 
 <div id="main-content" class="page-<?php echo $page ?>">
 	<menu class="menu-left col-lg-3">
-		<?php if (file_exists('pages/templates/menu/'.$page.'.php')) include 'menu/'.$page.'.php' ?>
+		<?php if ($page == 'noti' || $page == 'feedback' || $page == 'ratings') include 'menu/others.php';
+		else if (file_exists('pages/templates/menu/'.$page.'.php')) include 'menu/'.$page.'.php' ?>
 	</menu>
 	<main class="col-lg-9">

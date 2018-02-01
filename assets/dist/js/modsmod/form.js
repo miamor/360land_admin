@@ -60,7 +60,7 @@ var userID = splitURL[splitURL.length-1];
                 }
             });
             if (ok) {
-                var postData = objectifyForm($(this).serializeArray());
+                var postData = objectifyForm($('#'+v).serializeArray());
                 console.log(JSON.stringify(postData));
                 $.ajax({
                     url: API_URL+"/mods/",
@@ -72,6 +72,7 @@ var userID = splitURL[splitURL.length-1];
                     success: function (response) {
                         console.log(response);
                         mtip('', 'success', '', 'Thông tin người dùng đã được cập nhật thành công');
+                        location.href = location.href.split('?')[0];
                     },
                     error: function (a, b, c) {
                         console.log(a);
@@ -93,7 +94,7 @@ var userID = splitURL[splitURL.length-1];
                 }
             });
             if (ok) {
-                var postData = objectifyForm($(this).serializeArray());
+                var postData = objectifyForm($('#'+v).serializeArray());
                 console.log(JSON.stringify(postData));
                 $.ajax({
                     url: API_URL+"/mods/"+userID+"/",

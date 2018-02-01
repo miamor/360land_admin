@@ -46,6 +46,15 @@ else if ($mode == 'new') {
 
     include 'templates/'.$page.'/'.$mode.'.php';
 }
+else if ($mode == 'waiting') {
+    $pageTitle = 'Danh sách chờ kiểm duyệt';
+    include 'templates/header.php';
+
+    $config->addJS('plugins', 'DataTables/datatables.min.js');
+    $config->addJS('dist', $page.'/'.$mode.'.js');
+
+    include 'templates/'.$page.'/'.$mode.'.php';
+}
 else {
     $pageTitle = 'Users list';
     include 'templates/header.php';

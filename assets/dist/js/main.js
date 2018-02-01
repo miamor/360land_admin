@@ -525,7 +525,7 @@ function flatApp () {
 
 	if ($('.bootstrap-validator-form').length) validator();
 	//sce('#main-content');
-	//if ($('.chosen-select').length) choosen();
+	if ($('.chosen-select').length) choosen();
 //	icons();
 /*	$('.tooltip').remove();
 	$('.tooltips').tooltip({
@@ -743,7 +743,7 @@ jQuery(document).ready(function($){
 
 	} else {
 		if (location.href.indexOf('login') <= -1) location.href = MAIN_URL+'/login';
-        /*$('.nav-user #me_login_link').show();
+        $('.nav-user #me_login_link').show();
         $('.nav-user #me_dropdown_info, .nav-user #me_logout_link').hide();
         if (!isMobile) {
             $('#me_login_link').click(function () {
@@ -752,7 +752,7 @@ jQuery(document).ready(function($){
             })
         } else {
             $('.nav-user-mobile').show().html('<a href="'+MAIN_URL+'/login" class="loginlink"><i class="fa fa-ellipsis-h"></i></a>');
-        }*/
+        }
     }
 
 })

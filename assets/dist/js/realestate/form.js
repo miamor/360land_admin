@@ -213,10 +213,15 @@ var nodeID = splitURL[splitURL.length-1];
                 var a = $('[name="type_action"]').val();
                 $('#type').val($('#type'+a).val());
 
-                if (!$('#rank').val()) {
+                /*if (!$('#rank').val()) {
                     ok = false;
                     console.log('Missing parameters (rank)');
                     mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
+                }*/
+                if ( ($('#rank').val() == 1 && __userInfo.coin < 20) || __userInfo.coin < 10) {
+                    ok = false;
+                    console.log('Not enough money');
+                    mtip('', 'error', '', 'Tài khoản của bạn không đủ để đăng tin bài thuộc gói này');
                 }
 
                 if (!$('#type').val() || $('#type').val() == 'CN') {
@@ -370,12 +375,6 @@ var nodeID = splitURL[splitURL.length-1];
                     }
                 }
 
-                /*if (!$('#rank').val()) {
-                    ok = false;
-                    console.log('Missing parameters (rank)');
-                    mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
-                }*/
-
                 if (!$('#price_giatri').val()) {
                     ok = false;
                     console.log('Missing parameters (price_giatri)');
@@ -390,10 +389,6 @@ var nodeID = splitURL[splitURL.length-1];
                 if (postData.price_donvi == 'm') {
                     postData.pricefrom = postData.price_giatri/1000;
                 }
-
-                postData.vip = parseInt(postData.rank);
-                delete postData['rank'];
-                //postData.rank = parseInt(postData.rank);
 
                 postData.latitude = parseFloat(postData.latitude);
                 postData.longitude = parseFloat(postData.longitude);
