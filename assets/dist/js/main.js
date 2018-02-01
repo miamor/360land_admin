@@ -99,7 +99,7 @@ function getUserInfo () {
             console.log(__userInfo);
             //$('.nav-user').html('<img class="nav-user-avt" src=""/><h4 class="nav-user-name">'+__userInfo.username+'</h4>');
             $('.nav-user #me_login_link').hide();
-            $('.nav-user #me_dropdown_info').show();
+            $('.nav-user #me_dropdown_info, .nav-user #me_logout_link').show();
             setUserInfoNav();
         },
         error: function (a, b, c) {
@@ -689,7 +689,7 @@ function logout (autoLoggedOut = false) {
     __userInfo = __token = null;
     console.log('Logged out!');
     $('.nav-user #me_login_link').show();
-    $('.nav-user #me_dropdown_info').hide();
+    $('.nav-user #me_dropdown_info, .nav-user #me_logout_link').hide();
     if (autoLoggedOut) loadLoginPopup(autoLoggedOut);
     else location.reload();
 }
@@ -724,7 +724,7 @@ jQuery(document).ready(function($){
             console.log(__userInfo);
             //$('.nav-user').html('<img class="nav-user-avt" src=""/><h4 class="nav-user-name">'+__userInfo.username+'</h4>');
             $('.nav-user #me_login_link').hide();
-            $('.nav-user #me_dropdown_info').show();
+            $('.nav-user #me_dropdown_info, .nav-user #me_logout_link').show();
             setUserInfoNav();
         }
 
@@ -736,10 +736,15 @@ jQuery(document).ready(function($){
 		});
 		if ($('#right-side').length) runChat();
 		$('.menu-one-item[href="'+window.location.href+'"]').addClass('active');
+
+		if (__userInfo.typemod != 1) {
+			$('.menu-one-item[href*="user?type=coins&mode=request"]').remove();
+		}
+
 	} else {
 		if (location.href.indexOf('login') <= -1) location.href = MAIN_URL+'/login';
         /*$('.nav-user #me_login_link').show();
-        $('.nav-user #me_dropdown_info').hide();
+        $('.nav-user #me_dropdown_info, .nav-user #me_logout_link').hide();
         if (!isMobile) {
             $('#me_login_link').click(function () {
                 loadLoginPopup();

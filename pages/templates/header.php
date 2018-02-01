@@ -49,6 +49,7 @@ $config->addJS('dist', 'main.js'); ?>
 					<div class="clearfix"></div>
 				</a>
 			</div>
+			<a id="me_logout_link" href="<?php echo MAIN_URL ?>/logout">Logout</a>
 		</div>
 
 		<ul class="items-list">

@@ -1,7 +1,7 @@
 <?php
 $id = (isset($__pageAr[2]) ? $__pageAr[2] : null);
 
-if (!$n) header('Location: '.$config->mLink);
+if (!$n) header('Location: '.$config->smLink.'/me');
 
 if ($n) {
     if ($n == 'me') {
