@@ -30,12 +30,7 @@
         </div>
 
         <div class="add-form-submit form-one-button center">
-            <div class="col-sm-6" style="text-align:right">
-                <a class="forgetpassword" href="?mode=forgetpassword">Quên mật khẩu</a>
-            </div>
-            <div class="col-sm-6" style="text-align:left">
-                <input type="submit" class="btn" value="Đăng nhập"/>
-            </div>
+            <input type="submit" class="btn" value="Đăng nhập"/>
         </div>
     </form>
 </div>
