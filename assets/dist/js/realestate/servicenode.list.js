@@ -56,7 +56,12 @@ $(document).ready(function () {
             },
             { data: "details" },
 			{ data: "group" },
-			{ data: "type" },
+	    {
+		data: "type",
+		render: function (data, type, row) {
+		    return typeService[data]
+		}
+	    },
             {
                 data: "latitude",
                 render : function (data, type, row) {

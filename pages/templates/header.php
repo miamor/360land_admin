@@ -57,13 +57,13 @@ $config->addJS('dist', 'main.js'); ?>
 				<a href="<?php echo MAIN_URL ?>/realestate">Nodes &amp; Projects</a>
 			</li>
 			<li class="one-item <?php if ($page == 'user') echo 'active' ?>" id="user">
-				<a href="<?php echo MAIN_URL ?>/user">User</a>
+				<a href="<?php echo MAIN_URL ?>/user">Thành viên</a>
 			</li>
 			<li class="one-item <?php if ($page == 'modsmod') echo 'active' ?>" id="mod">
 				<a href="<?php echo MAIN_URL ?>/modsmod">Mods &amp; Smods</a>
 			</li>
 			<li class="one-item <?php if ($page == 'noti' || $page == 'feedback' || $page == 'ratings') echo 'active' ?>" id="others">
-				<a href="<?php echo MAIN_URL ?>/noti">Others</a>
+				<a href="<?php echo MAIN_URL ?>/noti">Khác</a>
 			</li>
 		</ul>
 

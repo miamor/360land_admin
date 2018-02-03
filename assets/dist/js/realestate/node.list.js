@@ -96,7 +96,12 @@ $(document).ready(function () {
                     return '<a href="'+location.href+'/'+row.id+'">'+data+'</a>'
                 }
             },
-            { data: "type" },
+            {
+		data: "type",
+		render: function (data, type, row) {
+		    return typeRealEstate[data];
+		}
+	    },
             { data: "tinh" },
             { data: "huyen" },
             { data: "address" },

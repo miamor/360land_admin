@@ -1,9 +1,9 @@
-<h3 class="menu-title">Others</h3>
+<h3 class="menu-title">Khác</h3>
 
 <div class="menu-one-box">
-    <h4 class="menu-one-box-header">Feedbacks</h4>
+    <h4 class="menu-one-box-header">Phản hồi</h4>
     <div class="menu-one-box-body">
-        <a class="menu-one-item" href="<?php echo $config->fbLink ?>">List all</a>
+        <a class="menu-one-item" href="<?php echo $config->fbLink ?>">Danh sách</a>
     </div>
 </div>
 
