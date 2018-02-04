@@ -287,6 +287,8 @@ var nodeID = splitURL[splitURL.length-1];
                 //if (newNode) postData.timeto = postData.timeto.replace('%2F', '-');
                 //else postData.timeto = postData.timefrom;
 
+                postData.thumbs = postData.thumbs.replace(/\n/g, ",");
+
                 console.log(postData);
                 console.log(JSON.stringify(postData));
 
@@ -397,6 +399,8 @@ var nodeID = splitURL[splitURL.length-1];
 
                 postData.tinh = $('#city option:selected').text();
                 postData.huyen = $('#district option:selected').text();
+
+                postData.thumbs = postData.thumbs.replace(/\n/g, ",");
 
                 console.log(postData);
                 console.log(JSON.stringify(postData));
