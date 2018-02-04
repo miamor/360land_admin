@@ -298,14 +298,6 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="form-group">
-        <div class="col-lg-3 no-padding control-label">Chọn gói (vip)</div>
-        <div class="col-lg-9 no-padding">
-            <input type="text" class="form-control" name="vip" id="vip" value="0"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
 
     <div class="user-info-input">
         <div class="txt-with-line center">

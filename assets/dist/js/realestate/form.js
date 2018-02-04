@@ -618,6 +618,7 @@ var nodeID = splitURL[splitURL.length-1];
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
+		    response = response.data;
                     console.log(response)
                     if (response.message) {
                         $('#main-content main').html('No item found');
@@ -681,6 +682,7 @@ var nodeID = splitURL[splitURL.length-1];
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
+		    response = response.data;
                     console.log(response);
                     if (response.message) {
                         $('#main-content main').html('No item found');
@@ -743,6 +745,7 @@ var nodeID = splitURL[splitURL.length-1];
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
+		    response = response.data;
                     console.log(response);
                     if (response.message) {
                         $('#main-content main').html('No item found');
