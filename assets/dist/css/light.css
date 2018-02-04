@@ -222,7 +222,7 @@ menu h3.menu-title{margin:8px 0 8px;color:#369fcf}
 
 /* Main */
 #main-content{margin-top:50px}
-#main-content:not(.page-login) main{margin-left:24%!important;width:76%!important}
+#main-content:not(.page-login) main{margin-left:24%!important;width:76%!important;padding-top:5px}
 
 
 /* Footer */
@@ -231,7 +231,7 @@ footer{margin-top:30px;padding:20px 5%;background:#fff;border-top:1px solid #eee
 
 .chart canvas{position:relative}
 .thead{background:#fafafa}
-main>h2{margin:30px 0 40px;color:#369fcf}
+main>h2{margin:20px 0 40px;color:#369fcf}
 .filterBox{border:1px solid #e5e5e5;background:#fafafa;box-shadow:inset 1px -1px 3px -1px rgba(0,0,0,.04);border-radius:4px;padding:10px;margin-bottom:30px}
 .filterBox .filterBox-header{font-size:18px;margin:-20px 0 10px;font-weight:600;}
 .one-book-actions{padding:0!important}
