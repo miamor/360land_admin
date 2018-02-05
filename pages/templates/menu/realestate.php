@@ -5,6 +5,7 @@
     <div class="menu-one-box-body">
         <a class="menu-one-item hidden" href="<?php echo $config->nLink ?>?mode=stat">Stat</a>
         <a class="menu-one-item" href="<?php echo $config->nLink ?>">Danh sách</a>
+        <a class="menu-one-item" href="<?php echo $config->nLink.'?mode=waiting' ?>">Đang chờ kiểm duyệt</a>
         <a class="menu-one-item" href="<?php echo $config->nLink.'?mode=new' ?>">Thêm mới</a>
     </div>
 </div>

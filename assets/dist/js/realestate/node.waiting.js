@@ -77,7 +77,7 @@ var table;
 $(document).ready(function () {
     table = $('#buyList').DataTable({
         "ajax": {
-            "url": API_URL+"/nodes/",
+            "url": API_URL+"/nodefalse/",
             "type": "GET",
             "beforeSend": function (xhr) {
                 xhr.setRequestHeader('Authorization', __token);
@@ -119,10 +119,10 @@ $(document).ready(function () {
                     checkCls = '';
                     if (row.status) checkCls = 'text-success';
 
-                    /*confirmBtn = '<a attr-id="'+row.id+'" class="row-btn-confirm" href="#" onclick="javascript:confirm(\''+row.id+'\'); return false"><i class="fa fa-check"></i></a>';
-                    if (row.status) confirmBtn = '<span attr-id="'+row.id+'" class="row-btn-confirm '+checkCls+'"><i class="fa fa-check"></i></span>';*/
+                    confirmBtn = '<a attr-id="'+row.id+'" class="row-btn-confirm" href="#" onclick="javascript:confirm(\''+row.id+'\'); return false"><i class="fa fa-check"></i></a>';
+                    if (row.status) confirmBtn = '<span attr-id="'+row.id+'" class="row-btn-confirm '+checkCls+'"><i class="fa fa-check"></i></span>';
 
-                    return '<div class="row-btns"><a attr-id="'+row.id+'" class="row-btn-edit" href="'+location.href+'/'+row.id+'"><i class="fa fa-pencil"></i></a> <a attr-id="'+row.id+'" class="row-btn-del text-danger" href="#" onclick="javascript:del(\''+row.id+'\'); return false"><i class="fa fa-trash"></i></a> </div>'
+                    return '<div class="row-btns"><a attr-id="'+row.id+'" class="row-btn-edit" href="'+location.href+'/'+row.id+'"><i class="fa fa-pencil"></i></a> <a attr-id="'+row.id+'" class="row-btn-del text-danger" href="#" onclick="javascript:del(\''+row.id+'\'); return false"><i class="fa fa-trash"></i></a> '+confirmBtn+'</div>'
                 }
             }
         ],

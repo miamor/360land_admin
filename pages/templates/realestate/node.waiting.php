@@ -1,5 +1,4 @@
-<h2>Tin đăng</h2>
-
+<h2>Tin đăng đang chờ duyệt</h2>
 <div class="">
 	<table id="buyList" class="table table-bordered table-striped">
 		<thead>

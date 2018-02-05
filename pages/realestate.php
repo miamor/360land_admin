@@ -70,6 +70,12 @@ if ($n) {
 
         include 'templates/'.$page.'/'.$n.'.'.$mode.'.php';
 
+    } else if ($mode == 'waiting') {
+        $config->addJS('plugins', 'DataTables/datatables.min.js');
+        $config->addJS('dist', $page.'/'.$n.'.waiting.js');
+
+        include 'templates/'.$page.'/'.$n.'.waiting.php';
+
     } else {
         $config->addJS('plugins', 'DataTables/datatables.min.js');
         $config->addJS('dist', $page.'/'.$n.'.list.js');
