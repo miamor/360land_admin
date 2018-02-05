@@ -33,6 +33,7 @@ function del (itemID) {
 function confirm (itemID) {
     $a = $('a.row-btn-confirm[attr-id="'+itemID+'"]');
     console.log('confirm '+itemID+' called!');
+    var title = $a.closest('tr').find('td:nth-child(2)').text();
     if (itemID) {
         $.ajax({
             url: API_URL+'/confirm_node/',
@@ -46,6 +47,7 @@ function confirm (itemID) {
                 if (response.message == 'OK') {
                     mtip('', 'success', '', 'Confirm thành công!');
                     $a.replaceWith('<span class="row-btn-confirm text-success"><i class="fa fa-check"></i></span>')
+                    $a.closest('tr').remove();
                 }
             },
             error: function (a, b, c) {
