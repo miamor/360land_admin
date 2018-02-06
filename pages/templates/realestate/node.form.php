@@ -237,16 +237,16 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-4 no-padding control-label">Thumbnails </div>
-        <div class="col-md-8 no-padding">
+        <div class="col-lg-3 no-padding control-label">Thumbnails </div>
+        <div class="col-lg-9 no-padding">
             <textarea class="form-control non-sce" name="thumbs" id="thumbs" placeholder="Thumbnails (Mỗi link ảnh một dòng)"></textarea>
         </div>
         <div class="clearfix"></div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-4 no-padding control-label">Video </div>
-        <div class="col-md-8 no-padding">
+        <div class="col-lg-3 no-padding control-label">Video </div>
+        <div class="col-lg-9 no-padding">
             <input class="form-control" name="video" id="video" placeholder="Video link"/>
         </div>
         <div class="clearfix"></div>
@@ -278,8 +278,8 @@
     </div>-->
 
     <div class="form-group rank-select" attr-required="1">
-        <div class="col-md-4 no-padding control-label">Chọn gói </div>
-        <div class="col-md-8 no-padding">
+        <div class="col-lg-3 no-padding control-label">Chọn gói </div>
+        <div class="col-lg-9 no-padding">
             <div class="rank-one-select active" attr-rank="0">
                 <div class="rank-one-des">Blah blah </div>
                 <div class="rank-one-title">Gói thường</div>
@@ -295,7 +295,7 @@
     </div>
 
     <div class="form-group form-time" attr-required="1">
-        <div class="col-md-4 no-padding control-label"><i class="fa fa-calendar"></i> Từ </div>
+        <div class="col-lg-3 no-padding control-label"><i class="fa fa-calendar"></i> Từ </div>
         <div class="col-md-3 no-padding">
             <input class="form-control" type="date" name="timefrom" id="timefrom">
         </div>

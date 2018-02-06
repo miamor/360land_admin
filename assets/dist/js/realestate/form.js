@@ -622,7 +622,7 @@ var nodeID = splitURL[splitURL.length-1];
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
-		    response = response.data;
+		            response = response.data;
                     console.log(response)
                     if (response.message) {
                         $('#main-content main').html('No item found');
@@ -652,8 +652,9 @@ var nodeID = splitURL[splitURL.length-1];
                     $('#price_donvi').val('b');
 
                     if (response.thumbs) {
-                        response.thumbsTxt = response.thumbs.implode('|');
-                        $('#thumbs').html(response.thumbsTxt.replace('|', '<br/>'));
+                        //response.thumbsTxt = response.thumbs.implode('|');
+                        response.thumbsTxt = response.thumbs;
+                        $('#thumbs').html(response.thumbsTxt.replace(',', '<br/>'));
                     }
 
                     $('#city option').each(function () {
@@ -686,7 +687,6 @@ var nodeID = splitURL[splitURL.length-1];
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
-		    response = response.data;
                     console.log(response);
                     if (response.message) {
                         $('#main-content main').html('No item found');
@@ -694,6 +694,7 @@ var nodeID = splitURL[splitURL.length-1];
                     }
 
                     response = response.data;
+                    console.log(response);
                     $('.node_title').html(response.name);
                     for (var key in response) {
                         $('input[name="'+key+'"], .form-group:not(".form-adr") select[name="'+key+'"], textarea[name="'+key+'"]').val(response[key])
@@ -715,8 +716,9 @@ var nodeID = splitURL[splitURL.length-1];
                     }
 
                     if (response.thumbs) {
-                        response.thumbsTxt = response.thumbs.implode('|');
-                        $('#thumbs').html(response.thumbsTxt.replace('|', '<br/>'));
+                        //response.thumbsTxt = response.thumbs.implode('|');
+                        response.thumbsTxt = response.thumbs;
+                        $('#thumbs').html(response.thumbsTxt.replace(',', '<br/>'));
                     }
 
                     $('#city option').each(function () {
@@ -749,7 +751,7 @@ var nodeID = splitURL[splitURL.length-1];
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
-		    response = response.data;
+		            response = response.data;
                     console.log(response);
                     if (response.message) {
                         $('#main-content main').html('No item found');
