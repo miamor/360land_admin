@@ -385,6 +385,9 @@ var nodeID = splitURL[splitURL.length-1];
                     mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc (price_giatri)');
                 }
 
+                if (submitType == 'add') {
+                    $('#type').val($('#type_').val());
+                }
 
                 var postData = objectifyForm($(this).serializeArray());
 
