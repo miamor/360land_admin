@@ -140,6 +140,8 @@
             <div class="form-group map_select customshow typereal2 typereal3 typereal4 typereal5 typereal6 typereal7 typereal8 typereal10 typereal12 typereal13 typereal14 typereal15 typereal16 typereal17 typereal18" attr-required="1">
                 <input type="text" class="form-control" style="margin-top:6px" id="address" name="address" placeholder="Địa chỉ cụ thể (không bắt buộc)"/>
 
+                <div class="gensmall" style="margin:8px 0 5px;font-style:italic">Địa điểm trên bản đồ không chính xác hay không tìm thấy? Click vào vị trí thích hợp trên bản đồ!</div>
+                    
                 <div id="infowindow-content">
                     <img src="" width="16" height="16" id="place-icon">
                     <span id="place-name" class="title"></span><br>
@@ -237,30 +239,6 @@
     </div>
 
     <div class="form-group">
-        <div class="col-lg-3 no-padding control-label">Thumbnails </div>
-        <div class="col-lg-9 no-padding">
-            <textarea class="form-control non-sce" name="thumbs" id="thumbs" placeholder="Thumbnails (Mỗi link ảnh một dòng)"></textarea>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-lg-3 no-padding control-label">Video </div>
-        <div class="col-lg-9 no-padding">
-            <input class="form-control" name="video" id="video" placeholder="Video link"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-lg-3 no-padding control-label">Panorama image </div>
-        <div class="col-lg-9 no-padding">
-            <input type="text" placeholder="Panorama image (url)" class="form-control" name="panorama_image" id="panorama_image"/>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="form-group">
         <div class="col-lg-3 no-padding control-label">Thông tin chi tiết </div>
         <div class="col-lg-9 no-padding">
             <textarea class="form-control" name="details" id="details" placeholder="Thông tin chi tiết"></textarea>
@@ -307,6 +285,45 @@
     </div>
 
 
+    <div class="form-group" style="margin-top:30px">
+            <div class="col-lg-3 no-padding control-label">Thumbnails </div>
+            <div class="col-lg-9 no-padding">
+                <textarea class="form-control hidden" name="thumbs" id="thumbs" placeholder="Thumbnails (Mỗi link ảnh một dòng)"></textarea>
+                <?php //include 'thumbs.form.php' ?>
+                <div id="dropbox" class="dropbox">
+                    <span class="message">Click to select files or Drop images here to upload.</span>
+                    <input type="file" multiple name="thumb_input" class="up-file-input hidden"/>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-3 no-padding control-label">Panorama image </div>
+            <div class="col-lg-9 no-padding">
+                <input type="hidden" placeholder="Panorama image (url)" class="form-control" name="panorama_image" id="panorama_image"/>
+                
+                <div id="dropbox_pano" class="dropbox">
+                    <span class="message"></span>
+                    <div class="select-image">
+                        <i class="fa fa-folder-open-o"></i>
+                        Select image
+                    </div>
+                    <input type="file" name="panorama_input" class="up-file-input hidden"/>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-3 no-padding control-label">Video </div>
+            <div class="col-lg-9 no-padding">
+                <input class="form-control" name="video" id="video" placeholder="Input video link (youtube, media link: mp4, ogg,...)"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        
     <div class="user-info-input">
         <div class="txt-with-line center">
         	<span class="txt generate-new-button">Thông tin cá nhân <span class="fa fa-caret-down"></span></span>

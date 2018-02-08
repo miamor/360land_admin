@@ -146,7 +146,10 @@
     <div class="form-group">
         <div class="col-lg-3 no-padding control-label">Thumbs </div>
         <div class="col-lg-9 no-padding">
-            <textarea class="form-control non-sce" name="thumbs" id="thumbs" placeholder="Mỗi link ảnh một dòng"></textarea>
+            <textarea class="form-control hidden" name="thumbs" id="thumbs" placeholder="Thumbnails (Mỗi link ảnh một dòng)"></textarea>
+            <div id="dropbox">
+                <span class="message">Drop images here to upload.</span>
+            </div>
         </div>
         <div class="clearfix"></div>
     </div>

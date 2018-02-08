@@ -1,15 +1,53 @@
-var placeLatLng = {lat: 18.02, lng: 105.86};
+var placeLatLng = { lat: 18.02, lng: 105.86 };
 
-var options = {district: ''};
+var options = { district: '' };
 var c_city = district = null;
 var cityList = [];
 
 var _URL = location.href.split('?')[0];
 var splitURL = _URL.split('/');
-var nodeID = splitURL[splitURL.length-1];
+var nodeID = splitURL[splitURL.length - 1];
 
-(function($) {
-    FormGen = function(submitType, nodeType) {
+
+var template = '<div class="preview"><div class="remove-thumb"><i class="fa fa-times"></i></div><span class="imageHolder"><img /><span class="uploaded"></span></span><div class="progressHolder"><div class="progress"></div></div></div>';
+
+function createImage(file, div) {
+    var preview = $(template),
+        image = $('img', preview);
+
+    var reader = new FileReader();
+
+    image.width = 100;
+    image.height = 100;
+
+    reader.onload = function (e) {
+        image.attr('src', e.target.result);
+    };
+    reader.readAsDataURL(file);
+
+    $(div).find('.message').hide();
+    preview.appendTo(div);
+
+    $(div).find('.remove-thumb').each(function () {
+        $(this).click(function (event) {
+            event.stopPropagation();
+            $(this).parent('.preview').hide();
+            if (!$(div).find('.preview').length) {
+                $(message).show()
+            }
+        });
+    })
+
+    // Associating a preview container
+    // with the file, using jQuery's $.data():
+    $.data(file, preview);
+}
+
+errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
+
+
+(function ($) {
+    FormGen = function (submitType, nodeType) {
         var v = $(this).attr('id');
         var $thismap = this;
         this.map = null;
@@ -35,7 +73,7 @@ var nodeID = splitURL[splitURL.length-1];
                 center: placeLatLng
             });
 
-            if (nodeType != 'project' && nodeType != 'service') {
+            if (nodeType == 'node') {
                 google.maps.event.addListenerOnce($thismap.map, 'idle', function () {
                     $('.map_select').hide();
                 });
@@ -51,18 +89,18 @@ var nodeID = splitURL[splitURL.length-1];
             var input = document.getElementById('address');
             var options = {
                 //types: ['(cities)'],
-                componentRestrictions: {country: 'vn'}
+                componentRestrictions: { country: 'vn' }
             };
             var autocomplete = new google.maps.places.Autocomplete(input, options);
             autocomplete.bindTo('bounds', $thismap.map);
 
-            google.maps.event.addDomListener(input, 'keydown', function(event) {
+            google.maps.event.addDomListener(input, 'keydown', function (event) {
                 if (event.keyCode === 13) {
                     event.preventDefault();
                 }
             });
 
-            autocomplete.addListener('place_changed', function() {
+            autocomplete.addListener('place_changed', function () {
                 $thismap.infowindow.close();
                 $thismap.marker.setVisible(false);
                 var place = autocomplete.getPlace();
@@ -70,6 +108,15 @@ var nodeID = splitURL[splitURL.length-1];
                 $thismap.changeAdrCallback(place);
             });
 
+            google.maps.event.addListener($thismap.map, 'click', function (event) {
+                $thismap.addMarker(event.latLng);
+            });
+
+
+            if (nodeType != 'service') {
+                $thismap.uploadThumbs();
+                $thismap.uploadPanorama();
+            }
 
             $('#city').change(function () {
                 c_city = $(this).val();
@@ -87,20 +134,27 @@ var nodeID = splitURL[splitURL.length-1];
                 $('#email').val(__userInfo.email);
             }*/
 
-            if (nodeType != 'project') {
+            if (nodeType == 'node') {
                 this.autocompleteProject();
 
                 $('.type_bds').change(function () {
                     var type = $(this).val();
                     $('.customshow').hide();
-                    $('.'+type).show();
+                    $('.' + type).show();
+                    $('#type').val($(this).val());
+                    if ($('.' + type + ' #address').length) {
+                        $('.' + type + ' #address').attr({
+                            'placeholder': 'Địa chỉ cụ thể *',
+                            'isRequired': 1
+                        })
+                    }
                 });
                 $('[name="type_action"]').change(function () {
                     var a = $(this).val();
                     $('.type_bds').hide();
-                    $('.type_bds#type'+a).show();
+                    $('.type_bds#type' + a).show();
                     $('#type').val('');
-                    $('#type'+a).val('CN');
+                    $('#type' + a).val('CN');
                 });
             }
 
@@ -114,7 +168,7 @@ var nodeID = splitURL[splitURL.length-1];
             $('#district').change(function () {
                 if (!$('#address').val().length) {
                     // get lat and lng based on district
-                    var placeTxt = $('#district option:selected').text()+', '+$('#city option:selected').text()+', Vietnam';
+                    var placeTxt = $('#district option:selected').text() + ', ' + $('#city option:selected').text() + ', Vietnam';
                     console.log(placeTxt);
                     $thismap.infowindow.close();
                     $thismap.marker.setVisible(false);
@@ -125,12 +179,19 @@ var nodeID = splitURL[splitURL.length-1];
             this.submitForm();
         }
 
+        this.addMarker = function (location) {
+            $thismap.marker.setPosition(location);
+            $thismap.marker.setVisible(true);
+            $('#latitude').val(location.lat());
+            $('#longitude').val(location.lng());
+        }
+
         this.autocompleteProject = function () {
             $('#tenduan').keydown(function () {
                 k = $(this).attr('name').split('town')[1];
                 $dr = $('#tenduan').next('.ville-dropdown');
                 loading = '<div class="spinner loading-sending"><div></div><div></div><div></div></div>';
-                if (!$dr.length) $('#tenduan').after('<div class="ville-dropdown">'+loading+'</div>');
+                if (!$dr.length) $('#tenduan').after('<div class="ville-dropdown">' + loading + '</div>');
                 else $dr.show().html(loading);
             }).donetyping(function () {
                 $dr = $('#tenduan').next('.ville-dropdown');
@@ -139,29 +200,178 @@ var nodeID = splitURL[splitURL.length-1];
                     $dr.hide().html('');
                 } else {
                     $.ajax({
-            			url: API_URL_ALL+'/search/duanbasic/',
-            			type: 'post',
-            			data: {input: val},
-            			success: function (data) {
+                        url: API_URL_ALL + '/search/duanbasic/',
+                        type: 'post',
+                        data: { input: val },
+                        success: function (data) {
                             $dr.show().html('');
                             if (data.message && data.message.indexOf('No duan') > -1) {
-                                $dr.html('<div class="ville-empty">Không có kết quả cho <b>'+val+'</b></div>');
+                                $dr.html('<div class="ville-empty">Không có kết quả cho <b>' + val + '</b></div>');
                             } else {
                                 $.each(data, function (i, d) {
-                    				var vO = '<div class="sthumb"><img src="'+d.thumb+'"/></div> <div class="stit"><b>'+d.name+'</b> <div class="sadr"><i class="fa fa-map-marker"></i> '+d.address+'</div></div><div class="clearfix"></div>';
-                    				$dr.append('<div class="ville-one" id="v'+i+'">'+vO+'</div>');
-                    				$('.ville-one#v'+i).click(function () {
+                                    var vO = '<div class="sthumb"><img src="' + d.thumb + '"/></div> <div class="stit"><b>' + d.name + '</b> <div class="sadr"><i class="fa fa-map-marker"></i> ' + d.address + '</div></div><div class="clearfix"></div>';
+                                    $dr.append('<div class="ville-one" id="v' + i + '">' + vO + '</div>');
+                                    $('.ville-one#v' + i).click(function () {
                                         console.log(vO);
                                         $('#tenduan').val(d.name);
                                         $('#duanid').val(d.id);
-                    					$dr.remove()
-                    				})
+                                        $dr.remove()
+                                    })
                                 })
                             }
                         }
                     })
                 }
             });
+        }
+
+
+
+        this.uploadThumbs = function () {
+            $('#thumbs').val('');
+            var dropbox = $('#dropbox'),
+                message = $('.message', dropbox);
+
+            dropbox.UploadImages({
+                // The name of the $_FILES entry:
+                paramname: 'thumbnail',
+
+                maxfiles: 25,
+                maxfilesize: 5,
+                url: API_URL + '/manager_user/uploadthumbnail/',
+                token: __token,
+                dragable: true,
+
+                uploadFinished: function (i, file, response) {
+                    $.data(file).addClass('done');
+                    // response is the JSON object that post_file.php returns
+                    //console.log(response);
+                    if (response.data) {
+                        img = response.data;
+
+                        var $thisImgHolder = $($.data(file)[0]);
+                        if ($thisImgHolder.is(':hidden')) {
+                            if ($('#thumbs').val().indexOf(img) > -1) {
+                                console.log('remove from thumb '+img);
+                                $('#thumbs').val($('#thumbs').val().replace(img + ',', ''));
+                            }
+                        } else {
+                            if ($('#thumbs').val().indexOf(img) == -1) {
+                                console.log('add to thumb '+img);
+                                $('#thumbs').val($('#thumbs').val() + img + ',');
+                            }
+                        }
+                        $thisImgHolder.find('.remove-thumb').click(function (event) {
+                            event.stopPropagation();
+                            $('#thumbs').val($('#thumbs').val().replace(img + ',', ''));
+                            $thisImgHolder.remove();
+                            if (!$(dropbox).find('.preview').length) {
+                                $(message).show()
+                            }
+                        })
+                    }
+                },
+
+                error: function (err, file) {
+                    console.log(err);
+                    switch (err) {
+                        case 'BrowserNotSupported':
+                            mtip('', 'error', '', 'Your browser does not support HTML5 file uploads!');
+                            break;
+                        case 'TooManyFiles':
+                            mtip('', 'error', '', 'Too many files!');
+                            break;
+                        case 'FileTooLarge':
+                            mtip('', 'error', '', file.name + ' is too large!.');
+                            break;
+                        default:
+                            break;
+                    }
+                },
+
+                // Called before each upload is started
+                beforeEach: function (file) {
+                    if (!file.type.match(/^image\//)) {
+                        alert('Only images are allowed!');
+                        return false;
+                    }
+                },
+
+                uploadStarted: function (i, file, len) {
+                    createImage(file, dropbox);
+                },
+
+                progressUpdated: function (i, file, progress) {
+                    $.data(file).find('.progress').width(progress);
+                }
+            });
+        }
+
+        this.uploadPanorama = function () {
+            $('#panorama_image').val('');
+            var dropbox = $('#dropbox_pano'),
+                message = $('.message', dropbox);
+
+                dropbox.UploadImages({
+                // The name of the $_FILES entry:
+                paramname: 'panorama',
+
+                maxfiles: 1,
+                maxfilesize: 8,
+                url: API_URL + '/manager_user/uploadpanorama/',
+                token: __token,
+                dragable: false,
+
+                uploadFinished: function (i, file, response) {
+                    $.data(file).addClass('done');
+                    // response is the JSON object that post_file.php returns
+                    console.log(response);
+                    if (response.data) {
+                        img = response.data;
+                        $('#panorama_image').val(img);
+
+                        var $thisImgHolder = $($.data(file)[0]);
+                        $thisImgHolder.find('.remove-thumb').click(function (event) {
+                            event.stopPropagation();
+                            $('#panorama_image').val('');
+                            $thisImgHolder.remove();
+                        })
+                    }
+                },
+
+                error: function (err, file) {
+                    console.log(err);
+                    switch (err) {
+                        case 'BrowserNotSupported':
+                            mtip('', 'error', '', 'Your browser does not support HTML5 file uploads!');
+                            break;
+                        case 'TooManyFiles':
+                            mtip('', 'error', '', '');
+                            break;
+                        case 'FileTooLarge':
+                            mtip('', 'error', '', file.name + ' is too large!.');
+                            break;
+                        default:
+                            break;
+                    }
+                },
+
+                // Called before each upload is started
+                beforeEach: function (file) {
+                    if (!file.type.match(/^image\//)) {
+                        alert('Only images are allowed!');
+                        return false;
+                    }
+                },
+
+                uploadStarted: function (i, file, len) {
+                    createImage(file, dropbox);
+                },
+
+                progressUpdated: function (i, file, progress) {
+                    $.data(file).find('.progress').width(progress);
+                }
+            })
         }
 
 
@@ -177,16 +387,23 @@ var nodeID = splitURL[splitURL.length-1];
 
 
         this.submitNode = function () {
-            $('#'+v).submit(function () {
+            $('#' + v).submit(function () {
                 var ok = true;
+
+                var a = $('[name="type_action"]').val();
+                $('#type').val($('#type' + a).val());
+
+                var typeBDS = $('#type').val();
+                console.log(typeBDS);
+                console.log($('.'+typeBDS));
+
                 $('[attr-required="1"]').not('.form-adr,.form-price,.form-type, .form-time').each(function () {
                     var val = $(this).find('input,select,textarea').val();
                     var $fgr = $(this).closest('.form-group');
                     var isCustomField = $fgr.is('.customshow');
-                    var typeBDS = $('#type').val();
-                    if ( (!isCustomField || (typeBDS && isCustomField && $fgr.is('.'+typeBDS) )
-                         ) && (!val || val == "CN")
-                       ) {
+                    if ((!isCustomField || (typeBDS && isCustomField && $fgr.is('.' + typeBDS))
+                    ) && (!val || val == "CN")
+                    ) {
                         console.log('Missing parameters');
                         console.log($fgr);
                         console.log($fgr.html);
@@ -196,29 +413,27 @@ var nodeID = splitURL[splitURL.length-1];
                     }
                 });
                 if (ok) {
-                    if ( !$('#city').val() || !$('#district').val() ) {
+                    if (!$('#city').val() || !$('#district').val()) {
                         console.log('Missing parameters (city || district)');
                         mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc (city/district)');
                         ok = false;
                         return false;
                     }
-                    /*if (!$('#address').val()) {
+                    if ($('.'+typeBDS).find('#address[isRequired="1"]').length && !$('#address').val()) {
                         console.log('Missing parameters (address)');
-                        mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
+                        //mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
+                        mtip('', 'error', '', 'Với loại bất động sản <b>' + $('.type_bds#type' + $('[name="type_action"]:checked').val()).find('option:selected').text() + '</b>, trường <b>Địa chỉ cụ thể</b> là bắt buộc.');
                         ok = false;
                         return false;
-                    }*/
+                    }
                 }
-
-                var a = $('[name="type_action"]').val();
-                $('#type').val($('#type'+a).val());
 
                 /*if (!$('#rank').val()) {
                     ok = false;
                     console.log('Missing parameters (rank)');
                     mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
                 }*/
-                if ( ($('#rank').val() == 1 && __userInfo.coin < 20) || __userInfo.coin < 10) {
+                if (($('#rank').val() == 1 && __userInfo.coin < 20) || __userInfo.coin < 10) {
                     ok = false;
                     console.log('Not enough money');
                     mtip('', 'error', '', 'Tài khoản của bạn không đủ để đăng tin bài thuộc gói này');
@@ -241,7 +456,7 @@ var nodeID = splitURL[splitURL.length-1];
                     mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc (price_giatri)');
                 } else {
                     var today = new Date();
-                    today.setHours(0,0,0,0);
+                    today.setHours(0, 0, 0, 0);
                     var timefrom = new Date($('#timefrom').val()).getTime();
                     var timeto = new Date($('#timeto').val()).getTime();
                     if (timefrom < today) {
@@ -255,12 +470,22 @@ var nodeID = splitURL[splitURL.length-1];
                     }
                 }
 
+                if ($('#thumbs').val()) {
+                    console.log($('#thumbs').val());
+                    console.log($('#thumbs').val().endsWith(','));
+                    if ($('#thumbs').val().endsWith(',')) {
+                        //var n = $('#thumbs').val().lastIndexOf(",");
+                        var len = $('#thumbs').val().length-1;
+                        $('#thumbs').val($('#thumbs').val().substring(0, len))
+                    }
+                }
+
                 var postData = objectifyForm($(this).serializeArray());
 
 
                 postData.price = postData.price_giatri;
                 if (postData.price_donvi == 'm') {
-                    postData.price = postData.price_giatri/1000;
+                    postData.price = postData.price_giatri / 1000;
                 }
 
                 postData.timefrom += " 00:00:00";
@@ -274,8 +499,8 @@ var nodeID = splitURL[splitURL.length-1];
                 if (!postData.sophongngu) postData.sophongngu = 0;
                 postData.sophongngu = parseInt(postData.sophongngu);
 
-                postData.latitude = parseFloat(postData.latitude);
-                postData.longitude = parseFloat(postData.longitude);
+                postData.latitude = (postData.latitude ? parseFloat(postData.latitude) : 0);
+                postData.longitude = (postData.longitude ? parseFloat(postData.longitude) : 0);
 
                 //if (submitType == 'add') {
                 //    postData.timefrom = postData.timeto = new Date().toISOString().replace(/T.*/,'');
@@ -287,8 +512,7 @@ var nodeID = splitURL[splitURL.length-1];
                 //if (newNode) postData.timeto = postData.timeto.replace('%2F', '-');
                 //else postData.timeto = postData.timefrom;
 
-                postData.thumbs = postData.thumbs.replace(/\n/g, ",");
-
+                
                 console.log(postData);
                 console.log(JSON.stringify(postData));
 
@@ -307,17 +531,17 @@ var nodeID = splitURL[splitURL.length-1];
             console.log('ajax post');
             //var postData = $(this).serialize();
             $.ajax({
-                url: API_URL+'/nodes/',
+                url: API_URL + '/nodes/',
                 type: 'post',
                 data: postData,
                 datatype: 'json',
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
                     console.log(response);
                     mtip('', 'success', '', 'Tin bài đã được đăng thành công');
-                    location.href = MAIN_URL+'/realestate/node';
+                    location.href = MAIN_URL + '/realestate/node';
                 },
                 error: function (a, b, c) {
                     console.log(a);
@@ -330,11 +554,11 @@ var nodeID = splitURL[splitURL.length-1];
             console.log('ajax post');
             //var postData = $(this).serialize();
             $.ajax({
-                url: API_URL+'/nodes/'+nodeID+'/',
+                url: API_URL + '/nodes/' + nodeID + '/',
                 type: 'put',
                 data: postData,
                 datatype: 'json',
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
@@ -351,11 +575,11 @@ var nodeID = splitURL[splitURL.length-1];
 
 
         this.submitProject = function () {
-            $('#'+v).submit(function () {
+            $('#' + v).submit(function () {
                 var ok = true;
                 $('[attr-required="1"]').not('.form-adr,.form-price').each(function () {
                     var val = $(this).find('input,select,textarea').val();
-                    if ( !val || val == "CN" ) {
+                    if (!val || val == "CN") {
                         console.log('Missing parameters');
                         console.log($fgr);
                         console.log($fgr.html);
@@ -365,7 +589,7 @@ var nodeID = splitURL[splitURL.length-1];
                     }
                 });
                 if (ok) {
-                    if ( !$('#city').val() || !$('#district').val() ) {
+                    if (!$('#city').val() || !$('#district').val()) {
                         console.log('Missing parameters (city || district)');
                         mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc (city/district)');
                         ok = false;
@@ -389,21 +613,30 @@ var nodeID = splitURL[splitURL.length-1];
                     $('#type').val($('#type_').val());
                 }
 
+                if ($('#thumbs').val()) {
+                    console.log($('#thumbs').val());
+                    console.log($('#thumbs').val().endsWith(','));
+                    if ($('#thumbs').val().endsWith(',')) {
+                        //var n = $('#thumbs').val().lastIndexOf(",");
+                        var len = $('#thumbs').val().length-1;
+                        $('#thumbs').val($('#thumbs').val().substring(0, len))
+                    }
+                }
+
                 var postData = objectifyForm($(this).serializeArray());
 
 
                 postData.pricefrom = postData.price_giatri;
                 if (postData.price_donvi == 'm') {
-                    postData.pricefrom = postData.price_giatri/1000;
+                    postData.pricefrom = postData.price_giatri / 1000;
                 }
 
-                postData.latitude = parseFloat(postData.latitude);
-                postData.longitude = parseFloat(postData.longitude);
+                postData.latitude = (postData.latitude ? parseFloat(postData.latitude) : 0);
+                postData.longitude = (postData.longitude ? parseFloat(postData.longitude) : 0);
 
                 postData.tinh = $('#city option:selected').text();
                 postData.huyen = $('#district option:selected').text();
 
-                postData.thumbs = postData.thumbs.replace(/\n/g, ",");
 
                 console.log(postData);
                 console.log(JSON.stringify(postData));
@@ -423,17 +656,17 @@ var nodeID = splitURL[splitURL.length-1];
             console.log('ajax post');
             //var postData = $(this).serialize();
             $.ajax({
-                url: API_URL+'/duans/',
+                url: API_URL + '/duans/',
                 type: 'post',
                 data: postData,
                 datatype: 'json',
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
                     console.log(response);
                     mtip('', 'success', '', 'Dự án đã được đăng thành công');
-                    location.href = MAIN_URL+'/realestate/project';
+                    location.href = MAIN_URL + '/realestate/project';
                 },
                 error: function (a, b, c) {
                     console.log(a);
@@ -446,11 +679,11 @@ var nodeID = splitURL[splitURL.length-1];
             console.log('ajax post');
             //var postData = $(this).serialize();
             $.ajax({
-                url: API_URL+'/duans/'+nodeID+'/',
+                url: API_URL + '/duans/' + nodeID + '/',
                 type: 'put',
                 data: postData,
                 datatype: 'json',
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
@@ -466,11 +699,11 @@ var nodeID = splitURL[splitURL.length-1];
 
 
         this.submitService = function () {
-            $('#'+v).submit(function () {
+            $('#' + v).submit(function () {
                 var ok = true;
                 $('[attr-required="1"]').not('.form-adr,.form-price').each(function () {
                     var val = $(this).find('input,select,textarea').val();
-                    if ( !val || val == "CN" ) {
+                    if (!val || val == "CN") {
                         console.log('Missing parameters');
                         mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
                         ok = false;
@@ -494,17 +727,17 @@ var nodeID = splitURL[splitURL.length-1];
             console.log('ajax post');
             //var postData = $(this).serialize();
             $.ajax({
-                url: API_URL+'/servicenodes/',
+                url: API_URL + '/servicenodes/',
                 type: 'post',
                 data: postData,
                 datatype: 'json',
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
                     console.log(response);
                     mtip('', 'success', '', 'Tiện ích đã được thêm thành công');
-                    location.href = MAIN_URL+'/realestate/servicenode';
+                    location.href = MAIN_URL + '/realestate/servicenode';
                 },
                 error: function (a, b, c) {
                     console.log(a);
@@ -514,15 +747,15 @@ var nodeID = splitURL[splitURL.length-1];
         }
 
         this.editService = function (postData) {
-            console.log('ajax post PUT '+API_URL+'/servicenodes/'+nodeID+'/');
+            console.log('ajax post PUT ' + API_URL + '/servicenodes/' + nodeID + '/');
             console.log(postData);
             //var postData = $(this).serialize();
             $.ajax({
-                url: API_URL+'/servicenodes/'+nodeID+'/',
+                url: API_URL + '/servicenodes/' + nodeID + '/',
                 type: 'put',
                 data: postData,
                 datatype: 'json',
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
@@ -547,7 +780,7 @@ var nodeID = splitURL[splitURL.length-1];
                         if (c_city == 'HN') {
                             if (district[u].id == 718)
                                 district[u].order = 15;
-                            else if(district[u].id > 15)
+                            else if (district[u].id > 15)
                                 district[u].order = district[u].id + 1;
                         }
                     }
@@ -562,12 +795,12 @@ var nodeID = splitURL[splitURL.length-1];
                     street = district[i].street;
                 }
             }
-            f.find('#district').html('<option value="-1">--Chọn Quận/Huyện *--</option>'+options.district);
+            f.find('#district').html('<option value="-1">--Chọn Quận/Huyện *--</option>' + options.district);
         }
 
         this.geocodeaddress = function (address) {
             //var address = this.input.place_search.value;
-            this.geocoder.geocode({'address': address}, function(results, status) {
+            this.geocoder.geocode({ 'address': address }, function (results, status) {
                 if (status === 'OK') {
                     $thismap.changeAdrCallback(results[0]);
                     return results[0]
@@ -580,10 +813,10 @@ var nodeID = splitURL[splitURL.length-1];
         this.changeAdrCallback = function (place) {
             if (place && place != undefined) {
                 if (!place.geometry) {
-                  // User entered the name of a Place that was not suggested and
-                  // pressed the Enter key, or the Place Details request failed.
-                  window.alert("No details available for input: '" + place.name + "'");
-                  return;
+                    // User entered the name of a Place that was not suggested and
+                    // pressed the Enter key, or the Place Details request failed.
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
                 }
 
                 // If the place has a geometry, then present it on a map.
@@ -601,11 +834,11 @@ var nodeID = splitURL[splitURL.length-1];
 
                 var address = '';
                 if (place.address_components) {
-                  address = [
-                    (place.address_components[0] && place.address_components[0].short_name || ''),
-                    (place.address_components[1] && place.address_components[1].short_name || ''),
-                    (place.address_components[2] && place.address_components[2].short_name || '')
-                  ].join(' ');
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
                 }
 
                 $thismap.infowindowContent.children['place-icon'].src = place.icon;
@@ -619,13 +852,13 @@ var nodeID = splitURL[splitURL.length-1];
 
         this.loadDataNode = function () {
             $.ajax({
-                url: API_URL+'/nodes/'+nodeID+'/',
+                url: API_URL + '/nodes/' + nodeID + '/',
                 type: 'get',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
-		            response = response.data;
+                    response = response.data;
                     console.log(response)
                     if (response.message) {
                         $('#main-content main').html('No item found');
@@ -634,7 +867,7 @@ var nodeID = splitURL[splitURL.length-1];
 
                     $('.node_title').html(response.title);
                     for (var key in response) {
-                        $('input[name="'+key+'"], .form-group:not(".form-adr") select[name="'+key+'"], textarea[name="'+key+'"]').val(response[key])
+                        $('input[name="' + key + '"], .form-group:not(".form-adr") select[name="' + key + '"], textarea[name="' + key + '"]').val(response[key])
                     }
                     // get typeid
                     typeid = parseInt(response.type.split('typereal')[1]);
@@ -646,19 +879,13 @@ var nodeID = splitURL[splitURL.length-1];
                         $('#type2').hide()
                     }
 
-                    $('.customshow.'+response.type).show();
+                    $('.customshow.' + response.type).show();
 
                     $('.form-type_action input, .form-type select').attr('disabled', true);
                     $('.form-type').find('input').attr('readonly', true);
 
                     $('#price_giatri').val(response.price);
                     $('#price_donvi').val('b');
-
-                    if (response.thumbs) {
-                        //response.thumbsTxt = response.thumbs.implode('|');
-                        response.thumbsTxt = response.thumbs;
-                        $('#thumbs').html(response.thumbsTxt.replace(',', '<br/>'));
-                    }
 
                     $('#city option').each(function () {
                         // if ($(this).text() == response.tinh)
@@ -684,7 +911,7 @@ var nodeID = splitURL[splitURL.length-1];
 
         this.loadDataProject = function () {
             $.ajax({
-                url: API_URL+'/duans/'+nodeID+'/',
+                url: API_URL + '/duans/' + nodeID + '/',
                 type: 'get',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
@@ -700,10 +927,10 @@ var nodeID = splitURL[splitURL.length-1];
                     console.log(response);
                     $('.node_title').html(response.name);
                     for (var key in response) {
-                        $('input[name="'+key+'"], .form-group:not(".form-adr") select[name="'+key+'"], textarea[name="'+key+'"]').val(response[key])
+                        $('input[name="' + key + '"], .form-group:not(".form-adr") select[name="' + key + '"], textarea[name="' + key + '"]').val(response[key])
                     }
                     if (key == 'uutien') {
-                        $('select[name="'+key+'"] option[value="'+response[key]+'"]').attr('selected');
+                        $('select[name="' + key + '"] option[value="' + response[key] + '"]').attr('selected');
                     }
 
                     $('#type_').val(response.type).attr('disabled', true);
@@ -713,15 +940,9 @@ var nodeID = splitURL[splitURL.length-1];
                         $('#price_donvi').val('b');
                         $('select#price_donvi option[value="b"]').attr('selected');
                     } else {
-                        $('#price_giatri').val(response.pricefrom*100);
+                        $('#price_giatri').val(response.pricefrom * 100);
                         $('#price_donvi').val('m');
                         $('select#price_donvi option[value="m"]').attr('selected');
-                    }
-
-                    if (response.thumbs) {
-                        //response.thumbsTxt = response.thumbs.implode('|');
-                        response.thumbsTxt = response.thumbs;
-                        $('#thumbs').html(response.thumbsTxt.replace(',', '<br/>'));
                     }
 
                     $('#city option').each(function () {
@@ -748,13 +969,13 @@ var nodeID = splitURL[splitURL.length-1];
 
         this.loadDataService = function () {
             $.ajax({
-                url: API_URL+'/servicenodes/'+nodeID+'/',
+                url: API_URL + '/servicenodes/' + nodeID + '/',
                 type: 'get',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
-		            response = response.data;
+                    response = response.data;
                     console.log(response);
                     if (response.message) {
                         $('#main-content main').html('No item found');
@@ -764,7 +985,7 @@ var nodeID = splitURL[splitURL.length-1];
                     response = response.data;
                     $('.node_title').html(response.name);
                     for (var key in response) {
-                        $('input[name="'+key+'"], .form-group:not(".form-adr") select[name="'+key+'"], textarea[name="'+key+'"]').val(response[key])
+                        $('input[name="' + key + '"], .form-group:not(".form-adr") select[name="' + key + '"], textarea[name="' + key + '"]').val(response[key])
                     }
                 },
                 error: function (a, b, c) {
