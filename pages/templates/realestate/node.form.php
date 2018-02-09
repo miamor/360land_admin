@@ -179,7 +179,7 @@
     </div>
 
     <div class="form-group hide customshow typereal2 typereal3 typereal4" attr-required="1">
-        <div class="col-lg-3 no-padding control-label">Chiều rộng mặt tiền *</div>
+        <div class="col-lg-3 no-padding control-label">Chiều rộng mặt tiền</div>
         <div class="col-lg-9 no-padding">
             <input type="number" name="rongtien" id="rongtien" class="form-control" placeholder="Chiều rộng mặt tiền"/>
         </div>
@@ -187,7 +187,7 @@
     </div>
 
     <div class="form-group hide customshow typereal2 typereal3 typereal4" attr-required="1">
-        <div class="col-lg-3 no-padding control-label">Chiều rộng mặt đường *</div>
+        <div class="col-lg-3 no-padding control-label">Chiều rộng mặt đường</div>
         <div class="col-lg-9 no-padding">
             <input type="number" name="rongduong" id="rongduong" class="form-control" placeholder="Chiều rộng mặt đường"/>
         </div>
@@ -286,42 +286,53 @@
 
 
     <div class="form-group" style="margin-top:30px">
-            <div class="col-lg-3 no-padding control-label">Thumbnails </div>
-            <div class="col-lg-9 no-padding">
-                <textarea class="form-control hidden" name="thumbs" id="thumbs" placeholder="Thumbnails (Mỗi link ảnh một dòng)"></textarea>
-                <?php //include 'thumbs.form.php' ?>
-                <div id="dropbox" class="dropbox">
-                    <span class="message">Click to select files or Drop images here to upload.</span>
-                    <input type="file" multiple name="thumb_input" class="up-file-input hidden"/>
-                </div>
+        <div class="col-lg-3 no-padding control-label">Thumbnails </div>
+        <div class="col-lg-9 no-padding">
+            <textarea class="form-control hidden" name="thumbs" id="thumbs" placeholder="Thumbnails (Mỗi link ảnh một dòng)"></textarea>
+            <?php //include 'thumbs.form.php' ?>
+            <div id="dropbox" class="dropbox">
+                <span class="message">Click to select files or Drop images here to upload.</span>
+                <input type="file" multiple name="thumb_input" class="up-file-input hidden" />
             </div>
-            <div class="clearfix"></div>
         </div>
+        <div class="clearfix"></div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-lg-3 no-padding control-label">Panorama image </div>
-            <div class="col-lg-9 no-padding">
-                <input type="hidden" placeholder="Panorama image (url)" class="form-control" name="panorama_image" id="panorama_image"/>
-                
-                <div id="dropbox_pano" class="dropbox">
-                    <span class="message"></span>
-                    <div class="select-image">
-                        <i class="fa fa-folder-open-o"></i>
-                        Select image
-                    </div>
-                    <input type="file" name="panorama_input" class="up-file-input hidden"/>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+    <div class="form-group">
+        <div class="col-lg-3 no-padding control-label">Panorama image </div>
+        <div class="col-lg-9 no-padding">
+            <input type="hidden" placeholder="Panorama image (url)" class="form-control" name="panorama_image" id="panorama_image" />
 
-        <div class="form-group">
-            <div class="col-lg-3 no-padding control-label">Video </div>
-            <div class="col-lg-9 no-padding">
-                <input class="form-control" name="video" id="video" placeholder="Input video link (youtube, media link: mp4, ogg,...)"/>
+            <div id="dropbox_pano" class="dropbox">
+                <span class="message"></span>
+                <div class="select-image">
+                    <i class="fa fa-folder-open-o"></i> Select image
+                </div>
+                <input type="file" name="panorama_input" class="up-file-input hidden" />
             </div>
-            <div class="clearfix"></div>
         </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group" style="margin-top:30px">
+        <div class="col-lg-3 no-padding control-label">Ảnh 360 </div>
+        <div class="col-lg-9 no-padding">
+            <textarea class="form-control hidden" name="anh_360" id="anh_360" placeholder="Thumbnails (Mỗi link ảnh một dòng)"></textarea>
+            <div id="dropbox_360" class="dropbox">
+                <span class="message">Click to select files or Drop images here to upload.</span>
+                <input type="file" multiple name="anh360_input" class="up-file-input hidden" />
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-3 no-padding control-label">Video </div>
+        <div class="col-lg-9 no-padding">
+            <input class="form-control" name="video" id="video" placeholder="Input video link (youtube, media link: mp4, ogg,...)" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
 
         
     <div class="user-info-input">

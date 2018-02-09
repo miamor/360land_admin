@@ -277,19 +277,19 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
 
                         var $thisImgHolder = $($.data(file)[0]);
                         if ($thisImgHolder.is(':hidden')) {
-                            if ($('#streetview_image').val().indexOf(img) > -1) {
-                                console.log('remove from streetview_image ' + img);
-                                $('#streetview_image').val($('#streetview_image').val().replace(img + ',', ''));
+                            if ($('#anh_360').val().indexOf(img) > -1) {
+                                console.log('remove from anh_360 ' + img);
+                                $('#anh_360').val($('#anh_360').val().replace(img + ',', ''));
                             }
                         } else {
-                            if ($('#streetview_image').val().indexOf(img) == -1) {
-                                console.log('add to streetview_image ' + img);
-                                $('#streetview_image').val($('#streetview_image').val() + img + ',');
+                            if ($('#anh_360').val().indexOf(img) == -1) {
+                                console.log('add to anh_360 ' + img);
+                                $('#anh_360').val($('#anh_360').val() + img + ',');
                             }
                         }
                         $thisImgHolder.find('.remove-thumb').click(function (event) {
                             event.stopPropagation();
-                            $('#streetview_image').val($('#streetview_image').val().replace(img + ',', ''));
+                            $('#anh_360').val($('#anh_360').val().replace(img + ',', ''));
                             $thisImgHolder.remove();
                             if (!$(dropbox).find('.preview').length) {
                                 $(message).show()
@@ -495,8 +495,13 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                 $('#type').val($('#type' + a).val());
 
                 var typeBDS = $('#type').val();
-                console.log(typeBDS);
-                console.log($('.' + typeBDS));
+
+                if (!typeBDS) {
+                    console.log('Missing parameters (type)');
+                    mtip('', 'error', '', 'Các trường đánh dấu * là bắt buộc');
+                    ok = false;
+                    return false;
+                }
 
                 $('[attr-required="1"]').not('.form-adr,.form-price,.form-type, .form-time').each(function () {
                     var val = $(this).find('input,select,textarea').val();
@@ -984,16 +989,19 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     xhr.setRequestHeader('Authorization', __token);
                 },
                 success: function (response) {
-                    response = response.data;
-                    console.log(response)
+                    console.log(response);
+
                     if (response.message) {
                         $('#main-content main').html('No item found');
                         return false;
                     }
 
+                    response = response.data;
+                    response['anh_360'] = response['anh360'];
+
                     $('.node_title').html(response.title);
                     for (var key in response) {
-                        $('input[name="' + key + '"], .form-group:not(".form-adr") select[name="' + key + '"], textarea[name="' + key + '"]').val(response[key])
+                        $('input[name="' + key + '"], .form-group:not(".form-adr") select[name="' + key + '"], textarea[name="' + key + '"]').not('[type="file"]').val(response[key])
                     }
                     // get typeid
                     typeid = parseInt(response.type.split('typereal')[1]);
@@ -1044,16 +1052,18 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                 },
                 success: function (response) {
                     console.log(response);
+
                     if (response.message) {
                         $('#main-content main').html('No item found');
                         return false;
                     }
 
                     response = response.data;
-                    console.log(response);
+                    response['anh_360'] = response['anh360'];
+
                     $('.node_title').html(response.name);
                     for (var key in response) {
-                        $('input[name="' + key + '"], .form-group:not(".form-adr") select[name="' + key + '"], textarea[name="' + key + '"]').val(response[key])
+                        $('input[name="' + key + '"], .form-group:not(".form-adr") select[name="' + key + '"], textarea[name="' + key + '"]').not('[type="file"]').val(response[key])
                     }
                     if (key == 'uutien') {
                         $('select[name="' + key + '"] option[value="' + response[key] + '"]').attr('selected');
