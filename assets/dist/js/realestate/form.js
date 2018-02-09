@@ -219,7 +219,7 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     };
                     console.log(searchData);
                     $.ajax({
-                        url: API_URL + '/search/duanbasic/',
+                        url: API_URL_ALL + '/search/duanbasic/',
                         type: 'post',
                         data: searchData,
                         success: function (data) {
@@ -243,7 +243,8 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                             }
                         },
                         error: function (a, b, c) {
-                            __handle_error(a);
+                            //__handle_error(a);
+                            console.log(a);
                         }
                     })
                 }
