@@ -88,12 +88,6 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
             $('#thumbs').val('');
             $('#panorama_image').val('');
 
-            if (nodeType != 'service') {
-                $thismap.uploadThumbs();
-                $thismap.uploadPanorama();
-                $thismap.upload360();
-            }
-
             if (submitType == 'edit') {
                 if (nodeType == 'project') {
                     this.loadDataProject();
@@ -102,6 +96,12 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                 } else {
                     this.loadDataNode()
                 }
+            }
+
+            if (nodeType != 'service') {
+                $thismap.uploadThumbs();
+                $thismap.uploadPanorama();
+                $thismap.upload360();
             }
 
             this.map = new google.maps.Map(document.getElementById('map_select'), {
@@ -638,6 +638,13 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                 if (!postData.sophongngu) postData.sophongngu = 0;
                 postData.sophongngu = parseInt(postData.sophongngu);
 
+                if (!postData.rongduong) postData.rongduong = 0;
+                else postData.rongduong = parseInt(postData.rongduong);
+                if (!postData.rongtien) postData.rongtien = 0;
+                else postData.rongtien = parseInt(postData.rongtien);
+                if (!postData.tang) postData.tang = 0;
+                else postData.tang = parseInt(postData.tang);
+
                 postData.latitude = (postData.latitude ? parseFloat(postData.latitude) : 0);
                 postData.longitude = (postData.latitude ? parseFloat(postData.longitude) : 0);
 
@@ -782,6 +789,13 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                 if (postData.price_donvi == 'm') {
                     postData.pricefrom = postData.price_giatri / 1000;
                 }
+
+                if (!postData.rongduong) postData.rongduong = 0;
+                else postData.rongduong = parseInt(postData.rongduong);
+                if (!postData.rongtien) postData.rongtien = 0;
+                else postData.rongtien = parseInt(postData.rongtien);
+                if (!postData.tang) postData.tang = 0;
+                else postData.tang = parseInt(postData.tang);
 
                 postData.latitude = (postData.latitude ? parseFloat(postData.latitude) : 0);
                 postData.longitude = (postData.longitude ? parseFloat(postData.longitude) : 0);
@@ -1028,7 +1042,15 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     }
 
                     response = response.data;
-                    response.thumbs = response.thumbs+',';
+
+                    if (response.thumbs == null) response.thumbs = '';
+                    else response.thumbs = response.thumbs+',';
+                    if (response.anh360 == null) response.anh360 = '';
+                    else response.anh360 = response.anh360+',';
+                    if (response.panorama_image == null) response.panorama_image = '';
+
+                    response.timefrom = response.timefrom.split('T')[0];
+                    response.timeto = response.timeto.split('T')[0];
 
                     $('.node_title').html(response.title);
                     for (var key in response) {
@@ -1100,6 +1122,12 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     }
 
                     response = response.data;
+
+                    if (response.thumbs == null) response.thumbs = '';
+                    else response.thumbs = response.thumbs+',';
+                    if (response.anh360 == null) response.anh360 = '';
+                    else response.anh360 = response.anh360+',';
+                    if (response.panorama_image == null) response.panorama_image = '';
 
                     $('.node_title').html(response.name);
                     for (var key in response) {
