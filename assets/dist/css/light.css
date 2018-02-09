@@ -299,7 +299,8 @@ body.mobile .v-user-avt{float:none;width:100%;height:180px;margin:0 auto 10px}
 .rank-one-title{position:absolute;bottom:5px;left:-3px;right:-3px;background:#0bc39b;color:#fff;padding:8px 15px;font-size:16px;*margin:-5px -3px 5px;border-radius:3px}
 
 .p_name{position:relative}
-.ville-dropdown{position:absolute;top:31px;left:0;right:0;z-index:100;border:1px solid #ddd;background:#fff;max-height:300px;overflow:auto}
+.ville-dropdown{position:absolute;top:29px;left:0;right:0;z-index:100;border:1px solid #ddd;background:#fff;max-height:300px;overflow:auto}
+.ville-empty{padding:7px 10px}
 .ville-dropdown .ville-one{background:#fff;border-top:1px solid #ddd;padding:2px 5px 3px;cursor:pointer}
 .ville-dropdown .ville-one:first-child{border-top:0}
 .ville-dropdown .ville-one:hover{background:#f7f7f7}
