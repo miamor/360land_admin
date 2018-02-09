@@ -161,6 +161,13 @@ function setUserInfoNav () {
     }
 }
 
+function __handle_error (a) {
+    if (a) {
+        console.log(a);
+    }
+    mtip('', 'error', '', 'Lỗi hệ thống! Vui lòng liên hệ với quản trị viên để được hỗ trợ sớm nhất!');
+}
+
 function mtip(a, c, title, content) {
 	$(".alert").length && $(".alert").remove();
 	if (a && a.length) {
