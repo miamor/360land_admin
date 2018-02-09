@@ -35,9 +35,10 @@ var table;
 $(document).ready(function () {
     table = $('#buyList').DataTable({
         "ajax": {
-            "url": API_URL+"/duans/",
-            "type": "GET",
-            "beforeSend": function (xhr) {
+            //url: API_URL+"/duans/",
+            url: (__uType == 'mod' ? API_URL+"/list_duanmod/" : API_URL+"/duans/"),
+            type: "GET",
+            beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', __token);
             }
         },

@@ -11,6 +11,33 @@ var nodeID = splitURL[splitURL.length - 1];
 
 var template = '<div class="preview"><div class="remove-thumb"><i class="fa fa-times"></i></div><span class="imageHolder"><img /><span class="uploaded"></span></span><div class="progressHolder"><div class="progress"></div></div></div>';
 
+function createImageReal (src, div, paramname) {
+    if (src.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+        var preview = $(template),
+            image = $('img', preview);
+
+        image.width = 100;
+        image.height = 100;
+
+        image.attr('src', src);
+
+        $(div).find('.message').hide();
+        preview.appendTo(div);
+        preview.addClass('done');
+
+        $(div).find('.remove-thumb').each(function () {
+            $(this).click(function (event) {
+                event.stopPropagation();
+                $(this).parent('.preview').hide();
+                if (!$(div).find('.preview').length) {
+                    $(message).show()
+                }
+                $('[name="'+paramname+'"]').val($('[name="'+paramname+'"]').val().replace(src, ''));
+            });
+        })
+    }
+}
+
 function createImage(file, div) {
     var preview = $(template),
         image = $('img', preview);
@@ -57,6 +84,16 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
         this.infowindowContent = document.getElementById('infowindow-content');
 
         this.initialize = function () {
+            $('#anh360').val('');
+            $('#thumbs').val('');
+            $('#panorama_image').val('');
+
+            if (nodeType != 'service') {
+                $thismap.uploadThumbs();
+                $thismap.uploadPanorama();
+                $thismap.upload360();
+            }
+
             if (submitType == 'edit') {
                 if (nodeType == 'project') {
                     this.loadDataProject();
@@ -112,11 +149,6 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                 $thismap.addMarker(event.latLng);
             });
 
-
-            if (nodeType != 'service') {
-                $thismap.uploadThumbs();
-                $thismap.uploadPanorama();
-            }
 
             $('#city').change(function () {
                 c_city = $(this).val();
@@ -253,17 +285,16 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
 
 
         this.upload360 = function () {
-            $('#thumbs').val('');
             var dropbox = $('#dropbox_360'),
                 message = $('.message', dropbox);
 
             dropbox.UploadImages({
                 // The name of the $_FILES entry:
-                paramname: 'anh360',
+                paramname: 'anh_360',
 
                 maxfiles: 25,
                 maxfilesize: 5,
-                url: API_URL + '/manager_user/uploadanh360/',
+                url: API_URL + '/uploadanh360/',
                 token: __token,
                 dragable: true,
 
@@ -278,19 +309,19 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
 
                         var $thisImgHolder = $($.data(file)[0]);
                         if ($thisImgHolder.is(':hidden')) {
-                            if ($('#anh_360').val().indexOf(img) > -1) {
-                                console.log('remove from anh_360 ' + img);
-                                $('#anh_360').val($('#anh_360').val().replace(img + ',', ''));
+                            if ($('#anh360').val().indexOf(img) > -1) {
+                                console.log('remove from anh360 ' + img);
+                                $('#anh360').val($('#anh360').val().replace(img + ',', ''));
                             }
                         } else {
-                            if ($('#anh_360').val().indexOf(img) == -1) {
-                                console.log('add to anh_360 ' + img);
-                                $('#anh_360').val($('#anh_360').val() + img + ',');
+                            if ($('#anh360').val().indexOf(img) == -1) {
+                                console.log('add to anh360 ' + img);
+                                $('#anh360').val($('#anh360').val() + img + ',');
                             }
                         }
                         $thisImgHolder.find('.remove-thumb').click(function (event) {
                             event.stopPropagation();
-                            $('#anh_360').val($('#anh_360').val().replace(img + ',', ''));
+                            $('#anh360').val($('#anh360').val().replace(img + ',', ''));
                             $thisImgHolder.remove();
                             if (!$(dropbox).find('.preview').length) {
                                 $(message).show()
@@ -335,7 +366,6 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
         }
 
         this.uploadThumbs = function () {
-            $('#thumbs').val('');
             var dropbox = $('#dropbox'),
                 message = $('.message', dropbox);
 
@@ -345,7 +375,7 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
 
                 maxfiles: 25,
                 maxfilesize: 5,
-                url: API_URL + '/manager_user/uploadthumbnail/',
+                url: API_URL + '/uploadthumbnail/',
                 token: __token,
                 dragable: true,
 
@@ -419,7 +449,6 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
         }
 
         this.uploadPanorama = function () {
-            $('#panorama_image').val('');
             var dropbox = $('#dropbox_pano'),
                 message = $('.message', dropbox);
 
@@ -429,7 +458,7 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
 
                 maxfiles: 1,
                 maxfilesize: 8,
-                url: API_URL + '/manager_user/uploadpanorama/',
+                url: API_URL + '/uploadpanorama/',
                 token: __token,
                 dragable: false,
 
@@ -701,6 +730,7 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                 var ok = true;
                 $('[attr-required="1"]').not('.form-adr,.form-price').each(function () {
                     var val = $(this).find('input,select,textarea').val();
+                    var $fgr = $(this).closest('.form-group');
                     if (!val || val == "CN") {
                         console.log('Missing parameters');
                         console.log($fgr);
@@ -998,7 +1028,7 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     }
 
                     response = response.data;
-                    response['anh_360'] = response['anh360'];
+                    response.thumbs = response.thumbs+',';
 
                     $('.node_title').html(response.title);
                     for (var key in response) {
@@ -1021,6 +1051,16 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
 
                     $('#price_giatri').val(response.price);
                     $('#price_donvi').val('b');
+
+                    thumbsAr = response.thumbs.split(',');
+                    $.each(thumbsAr, function (i, v) {
+                        createImageReal(v, $('#dropbox'), 'thumbs');
+                    });
+                    createImageReal(response.panorama_image, $('#dropbox_pano'), 'panorama_image');
+                    img360Ar = response.anh360.split(',');
+                    $.each(img360Ar, function (i, v) {
+                        createImageReal(v, $('#dropbox_360'), 'anh360');
+                    });
 
                     $('#city option').each(function () {
                         // if ($(this).text() == response.tinh)
@@ -1060,7 +1100,6 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     }
 
                     response = response.data;
-                    response['anh_360'] = response['anh360'];
 
                     $('.node_title').html(response.name);
                     for (var key in response) {
@@ -1069,6 +1108,16 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     if (key == 'uutien') {
                         $('select[name="' + key + '"] option[value="' + response[key] + '"]').attr('selected');
                     }
+
+                    thumbsAr = response.thumbs.split(',');
+                    $.each(thumbsAr, function (i, v) {
+                        createImageReal(v, $('#dropbox'), 'thumbs');
+                    });
+                    createImageReal(response.panorama_image, $('#dropbox_pano'), 'panorama_image');
+                    img360Ar = response.anh360.split(',');
+                    $.each(img360Ar, function (i, v) {
+                        createImageReal(v, $('#dropbox_360'), 'anh360');
+                    });
 
                     $('#type_').val(response.type).attr('disabled', true);
 

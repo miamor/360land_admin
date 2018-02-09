@@ -255,18 +255,20 @@
 			
 			__this.options.uploadStarted(index, file, files_count);  
 			
-			xhr.onload = function() { 
+			xhr.onload = function() {
 			    if (xhr.responseText) {
-				var now = new Date().getTime(),
-				    timeDiff = now - start_time,
+					var now = new Date().getTime(),
+				    	timeDiff = now - start_time;
 					
-					result = __this.options.uploadFinished(index, file, jQuery.parseJSON(xhr.responseText), timeDiff);
+					console.log(xhr.responseText);
+					
+					var result = __this.options.uploadFinished(index, file, jQuery.parseJSON(xhr.responseText), timeDiff);
 
 					filesDone++;
 					if (filesDone == files_count - filesRejected) {
 						__this.afterAll();
 					}
-			    if (result === false) stop_loop = true;
+			    	if (result === false) stop_loop = true;
 			    }
 			};
 		}
