@@ -80,7 +80,7 @@ var typeService = {
 
 var isMobile = ($(window).width() <= 500 ? true : false);
 var __uType = (localStorage.getItem('uType') ? localStorage.getItem('uType') : 'mod');
-var API_URL = '//vingroupsmartcitynguyentrai.com:8000/manager_'+__uType;
+var API_URL = '//beapi.mappy.com.vn:8989/manager_'+__uType;
 var API_URL_ALL = API_URL.split('/manager_')[0];
 var __token = __userInfo = null;
 
