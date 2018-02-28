@@ -12,7 +12,7 @@ define('HOST_URL', '//192.168.8.100'.$__pattern);
 */
 define('HOST_URL', '//localhost'.$__pattern);
 //define('HOST_URL', '//www.mappy.com.vn'.$__pattern);
-define('MAIN_URL', 'http:'.HOST_URL);
+define('MAIN_URL', '//'.HOST_URL);
 define('PAGE_URL', str_replace('_admin', '', MAIN_URL));
 define('ASSETS', MAIN_URL.'/assets');
 define('CSS', ASSETS.'/dist/css');
