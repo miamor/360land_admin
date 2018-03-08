@@ -181,7 +181,7 @@
             <?php //include 'thumbs.form.php' ?>
             <div id="dropbox" class="dropbox">
                 <span class="message">Click to select files or Drop images here to upload.</span>
-                <input type="file" multiple name="thumb_input" class="up-file-input hidden" />
+                <input type="file" accept="image/*" multiple name="thumb_input" class="up-file-input hidden" />
             </div>
         </div>
         <div class="clearfix"></div>
@@ -197,7 +197,7 @@
                 <div class="select-image">
                     <i class="fa fa-folder-open-o"></i> Select image
                 </div>
-                <input type="file" name="panorama_input" class="up-file-input hidden" />
+                <input type="file" accept="image/*" name="panorama_input" class="up-file-input hidden" />
             </div>
         </div>
         <div class="clearfix"></div>
@@ -209,7 +209,7 @@
             <textarea class="form-control hidden" name="anh360" id="anh360"></textarea>
             <div id="dropbox_360" class="dropbox">
                 <span class="message">Click to select files or Drop images here to upload.</span>
-                <input type="file" multiple name="anh_360" class="up-file-input hidden"/>
+                <input type="file" accept="image/*" multiple name="anh_360" class="up-file-input hidden"/>
             </div>
         </div>
         <div class="clearfix"></div>

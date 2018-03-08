@@ -1,7 +1,7 @@
 function submitLoginForm () {
     var type = $('#login [name="type"]:checked').val();
     $.ajax({
-        url: API_URL_ALL+'/login/mod/',
+        url: API_URL_ALL+'/login/'+type+'/',
         type: 'post',
         data: $('#login').serialize(),
         success: function (response) {
