@@ -11,7 +11,7 @@ var nodeID = splitURL[splitURL.length - 1];
 
 var template = '<div class="preview"><div class="remove-thumb"><i class="fa fa-times"></i></div><span class="imageHolder"><img /><span class="uploaded"></span></span><div class="progressHolder"><div class="progress"></div></div></div>';
 
-function createImageReal (src, div, paramname) {
+function createImageReal(src, div, paramname) {
     if (src.match(/\.(jpeg|jpg|gif|png)$/) != null) {
         var preview = $(template),
             image = $('img', preview);
@@ -32,7 +32,7 @@ function createImageReal (src, div, paramname) {
                 if (!$(div).find('.preview').length) {
                     $(message).show()
                 }
-                $('[name="'+paramname+'"]').val($('[name="'+paramname+'"]').val().replace(src, ''));
+                $('[name="' + paramname + '"]').val($('[name="' + paramname + '"]').val().replace(src, ''));
             });
         })
     }
@@ -229,23 +229,23 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
             $thismap.changeAdrByCoord(loc);
         }
 
-        this.changeAdrByCoord(latlng) = function {
+        this.changeAdrByCoord = function (latlng) {
             this.geocoder.geocode({
-              'latLng': latlng
+                'latLng': latlng
             }, function (results, status) {
-              if (status === google.maps.GeocoderStatus.OK) {
-                if (results[1]) {
-                  console.log(results[1]);
-                  $('#address').val(results[1]);
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        console.log(results[1]);
+                        $('#address').val(results[1].formatted_address);
+                    } else {
+                        alert('No results found');
+                    }
                 } else {
-                  alert('No results found');
+                    alert('Geocoder failed due to: ' + status);
                 }
-              } else {
-                alert('Geocoder failed due to: ' + status);
-              }
             });
-          }
-          
+        }
+
 
         this.autocompleteProject = function () {
             $('#tenduan').keydown(function () {
@@ -1063,9 +1063,9 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     response = response.data;
 
                     if (response.thumbs == null) response.thumbs = '';
-                    else response.thumbs = response.thumbs+',';
+                    else response.thumbs = response.thumbs + ',';
                     if (response.anh360 == null) response.anh360 = '';
-                    else response.anh360 = response.anh360+',';
+                    else response.anh360 = response.anh360 + ',';
                     if (response.panorama_image == null) response.panorama_image = '';
 
                     response.timefrom = response.timefrom.split('T')[0];
@@ -1143,9 +1143,9 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     response = response.data;
 
                     if (response.thumbs == null) response.thumbs = '';
-                    else response.thumbs = response.thumbs+',';
+                    else response.thumbs = response.thumbs + ',';
                     if (response.anh360 == null) response.anh360 = '';
-                    else response.anh360 = response.anh360+',';
+                    else response.anh360 = response.anh360 + ',';
                     if (response.panorama_image == null) response.panorama_image = '';
 
                     $('.node_title').html(response.name);
