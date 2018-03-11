@@ -83,6 +83,7 @@ $(document).ready(function () {
                 xhr.setRequestHeader('Authorization', __token);
             }
         },
+        "ordering": false,
         "columns": [
             {
                 data: "id",

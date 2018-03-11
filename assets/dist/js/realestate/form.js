@@ -332,7 +332,8 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                         if ($thisImgHolder.is(':hidden')) {
                             if ($('#anh360').val().indexOf(img) > -1) {
                                 console.log('remove from anh360 ' + img);
-                                $('#anh360').val($('#anh360').val().replace(img + ',', ''));
+                                $('#anh360').val($('#anh360').val().replace(img, ''));
+                                $('#anh360').val($('#anh360').val().replace(/,+/g, ','));
                             }
                         } else {
                             if ($('#anh360').val().indexOf(img) == -1) {
@@ -1067,7 +1068,7 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     console.log(response);
 
                     if (response.message) {
-                        $('#main-content main').html('No item found');
+                        $('#main-content main').html('Không có dữ liệu');
                         return false;
                     }
 
@@ -1147,7 +1148,7 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     console.log(response);
 
                     if (response.message) {
-                        $('#main-content main').html('No item found');
+                        $('#main-content main').html('Không có dữ liệu');
                         return false;
                     }
 
@@ -1222,7 +1223,7 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                     response = response.data;
                     console.log(response);
                     if (response.message) {
-                        $('#main-content main').html('No item found');
+                        $('#main-content main').html('Không có dữ liệu');
                         return false;
                     }
 
