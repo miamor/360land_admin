@@ -63,7 +63,7 @@
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Birthday</div>
 		<div class="col-lg-9 no-padding">
-			<input class="form-control" name="birthday" placeholder="Birthday" type="datetime"/>
+			<input class="form-control" name="birthday" placeholder="Birthday" type="date"/>
 		</div>
 		<div class="clearfix"></div>
 	</div>

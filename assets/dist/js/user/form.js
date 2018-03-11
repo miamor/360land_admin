@@ -41,6 +41,7 @@ var userID = splitURL[splitURL.length-1];
 
                     $('input[name="coin"], input[name="username"]').attr('disabled', true);
                     $('input[name="sex"][value="'+response.sex+'"]').attr('checked', true).closest('.radio').addClass('checked');
+                    $('input[name="status"][value="'+response.sex+'"]').attr('checked', true).closest('.radio').addClass('checked');
                 },
                 error: function (a, b, c) {
                     console.log(a)
@@ -59,6 +60,13 @@ var userID = splitURL[splitURL.length-1];
                     return false;
                 }
             });
+            if (ok) {
+                if (/^0(1\d{9}|9\d{8})$/.test($('[name="phone"]').val()) == false) {
+                    ok = false;
+                    mtip('', 'error', '', 'Số điện thoại không hợp lệ!');
+                    return false
+                }
+            }
             if (ok) {
                 var postData = objectifyForm($('#'+v).serializeArray());
                 console.log(JSON.stringify(postData));
@@ -93,6 +101,13 @@ var userID = splitURL[splitURL.length-1];
                     return false;
                 }
             });
+            if (ok) {
+                if (/^0(1\d{9}|9\d{8})$/.test($('[name="phone"]').val()) == false) {
+                    ok = false;
+                    mtip('', 'error', '', 'Số điện thoại không hợp lệ!');
+                    return false
+                }
+            }
             if (ok) {
                 var postData = objectifyForm($('#'+v).serializeArray());
                 console.log(JSON.stringify(postData));
