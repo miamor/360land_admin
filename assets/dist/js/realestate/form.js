@@ -27,12 +27,14 @@ function createImageReal(src, div, paramname) {
 
         $(div).find('.remove-thumb').each(function () {
             $(this).click(function (event) {
+                console.log('remove_thumb clicked');
                 event.stopPropagation();
                 $(this).parent('.preview').hide();
                 if (!$(div).find('.preview').length) {
                     $(message).show()
                 }
-                $('[name="' + paramname + '"]').val($('[name="' + paramname + '"]').val().replace(src, ''));
+                $('[name="'+paramname+'"]').val($('[name="'+paramname+'"]').val().replace(src, ''));
+                $('[name="'+paramname+'"]').val($('[name="'+paramname+'"]').val().replace(/,+/g, ','));
             });
         })
     }
@@ -340,7 +342,11 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                         }
                         $thisImgHolder.find('.remove-thumb').click(function (event) {
                             event.stopPropagation();
-                            $('#anh360').val($('#anh360').val().replace(img + ',', ''));
+                            //$('#anh360').val($('#anh360').val().replace(img + ',', ''));
+
+                            $('#anh360').val($('#anh360').val().replace(img, ''));
+                            $('#anh360').val($('#anh360').val().replace(/,+/g, ','));
+    
                             $thisImgHolder.remove();
                             if (!$(dropbox).find('.preview').length) {
                                 $(message).show()
@@ -413,17 +419,22 @@ errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"];
                         if ($thisImgHolder.is(':hidden')) {
                             if ($('#thumbs').val().indexOf(img) > -1) {
                                 console.log('remove from thumb ' + img);
-                                $('#thumbs').val($('#thumbs').val().replace(img + ',', ''));
+                                //$('#thumbs').val($('#thumbs').val().replace(img + ',', ''));
+                                $('#thumbs').val($('#thumbs').val().replace(img, ''));
+                                $('#thumbs').val($('#thumbs').val().replace(/,+/g, ','));
                             }
                         } else {
                             if ($('#thumbs').val().indexOf(img) == -1) {
                                 console.log('add to thumb ' + img);
+                                console.log('thumbs val: '+$('#thumbs').val());
                                 $('#thumbs').val($('#thumbs').val() + img + ',');
                             }
                         }
                         $thisImgHolder.find('.remove-thumb').click(function (event) {
                             event.stopPropagation();
-                            $('#thumbs').val($('#thumbs').val().replace(img + ',', ''));
+                            //$('#thumbs').val($('#thumbs').val().replace(img + ',', ''));
+                            $('#thumbs').val($('#thumbs').val().replace(img, ''));
+                            $('#thumbs').val($('#thumbs').val().replace(/,+/g, ','));
                             $thisImgHolder.remove();
                             if (!$(dropbox).find('.preview').length) {
                                 $(message).show()
